@@ -1,22 +1,21 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { User, Comment, Movie, Stats } from "./model/Model.js";
+import cors from "cors";
+import movieRoute from "./routes/movie.js";
 
 const app = express();
-dotenv.config()
-// app.use(configDotenv.apply)
+dotenv.config();
 
-app.listen("3000", () => {
+app.use(express.json());
+
+app.use("/api/movie", movieRoute);
+
+app.listen("3000", async () => {
   console.log("server is running");
-//   console.log(process.env.MONGO_URL);
   try {
     mongoose.connect(process.env.MONGO_URL);
     console.log("connection successfully!");
-    User.createCollection()
-    Comment.createCollection()
-    Movie.createCollection()
-    Stats.createCollection()
   } catch (err) {
     console.log(err);
   }

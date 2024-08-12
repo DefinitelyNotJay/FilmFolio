@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { Comment, Movie, User } from "../model/Model.js";
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary } from "cloudinary";
 
 export async function getMovieFromId(req, res, next) {
   const { id } = req.params;
@@ -32,12 +32,20 @@ export async function removeFavoriteMovie(req, res, next) {
   res.status(200).json(user);
 }
 
-export async function createComment(req, res, next) {
-  const { movieId, userId, ...comment } = req.body;
-  const commentDoc = await Comment.collection.insertOne(req.body);
-  res.status(200).json(commentDoc)
+export async function createMovie(req, res, next) {
+  const imageFile = req.file;
+  const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+    resource_type: "image",
+  });
+  try {
+    await Movie.create({
+      ...req.body,
+      image: imageUpload.secure_url,
+    });
+    res.json({ success: true });
+  } catch (err) {
+    res.json(err);
+  }
 }
 
-export async function createMovie(req, res, next){
 
-}

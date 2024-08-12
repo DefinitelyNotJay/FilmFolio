@@ -1,18 +1,18 @@
 import express from "express";
 import {
   addToFavoriteMovie,
-  createComment,
   getMovieFromId,
   removeFavoriteMovie,
+  createMovie,
 } from "../controllers/movieController.js";
+import upload from "../middleware/multer.js";
 
 const router = express.Router();
 
 router.get("/:id", getMovieFromId);
-router.post("/create");
+router.post("/create", upload.single("image"), createMovie);
 router.post("/delete/:id");
 router.post("/favorite", addToFavoriteMovie);
 router.delete("/unfavorite", removeFavoriteMovie);
-router.post("/comment", createComment);
 
 export default router;

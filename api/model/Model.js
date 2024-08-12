@@ -22,6 +22,7 @@ const movieSchema = new mongoose.Schema(
     rating: { type: Number, default: 0 },
     category: { type: String },
     views: { type: Number, default: 0 },
+    image: { type: String, required: true },
   },
   { timestamps: true }
 );

@@ -2,21 +2,22 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import movieRoute from "./routes/movie.js";
+import movieRoute from "./routes/movieRoute.js";
+import { User } from "./model/Model.js";
+import connectDB from "./config/mongodb.js";
+import connectCloudinary from "./config/cloudinary.js";
 
 const app = express();
 dotenv.config();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/movie", movieRoute);
 
-app.listen("3000", async () => {
-  console.log("server is running");
-  try {
-    mongoose.connect(process.env.MONGO_URL);
-    console.log("connection successfully!");
-  } catch (err) {
-    console.log(err);
-  }
+connectDB();
+connectCloudinary();
+
+app.listen("3000", () => {
+  console.log(`server start on port ${process.env.PORT}`);
 });

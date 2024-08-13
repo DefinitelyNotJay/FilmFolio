@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 export default function AdminSidebar() {
   return (
-    <div className="h-full w-[20%] fixed border-r border-r-[#343A40] flex flex-col justify-between py-8 px-12">
+    <div className="h-screen w-[20%] sticky top-0 border-r border-r-[#343A40] flex flex-col justify-between py-8 px-12">
       <div className="text-[36px] text-center text-white font-semibold cursor-pointer">
         Film<span className="text-[#F5CB5C] ">Folio</span>
       </div>

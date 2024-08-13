@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   House,
   Clapperboard,
@@ -18,7 +18,7 @@ export default function AdminSidebar() {
         <AdminNavLink link="/movies" Icon={Clapperboard} title="Movies" />
         <AdminNavLink link="/users" Icon={User} title="Users" />
         <AdminNavLink link="/comments" Icon={MessageCircle} title="Comments" />
-        <AdminNavLink link="/movies" Icon={UserPen} title="Profile" />
+        <AdminNavLink link="/profile" Icon={UserPen} title="Profile" />
       </nav>
       <div></div>
       <button className="text-white flex gap-2 px-3 py-4 rounded-md">
@@ -29,27 +29,20 @@ export default function AdminSidebar() {
   );
 }
 
-// black: {
-//     100: "#d3d3d3",
-//     200: "#a7a7a7",
-//     300: "#7c7c7b",
-//     400: "#50504f",
-//     500: "#242423",
-//     600: "#1d1d1c",
-//     700: "#161615",
-//     800: "#0e0e0e",
-//     900: "#070707"
-// },
-
 export function AdminNavLink({ link, title, Icon }) {
+  const location = useLocation();
+  const page = location.pathname.split()[0];
+  const active = page === link;
   return (
     <div>
       <NavLink
         to={link}
-        className="text-white gap-2 flex hover:bg-[#50504f] px-3 py-4 rounded-md"
+        className={`text-white gap-2 flex hover:bg-[#50504f] px-3 py-4 rounded-md ${
+          active && "bg-[#F5CB5C]"
+        }`}
       >
-        <Icon />
-        <p className=" text-white">{title}</p>
+        <Icon className={`${active && "text-[#333]"}`}/>
+        <p className={`hidden lg:block ${active && "text-[#333]"} `}>{title}</p>
       </NavLink>
     </div>
   );

@@ -41,7 +41,7 @@ export function AdminNavLink({ link, title, Icon }) {
           active && "bg-[#F5CB5C]"
         }`}
       >
-        <Icon className={`${active && "text-[#333]"}`}/>
+        <Icon className={`${active && "text-[#333]"}`} />
         <p className={`hidden lg:block ${active && "text-[#333]"} `}>{title}</p>
       </NavLink>
     </div>

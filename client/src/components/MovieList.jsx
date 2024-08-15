@@ -1,7 +1,7 @@
 import { Eye, Star, Heart } from "lucide-react";
 export default function MovieList() {
   return (
-    <div className="w-48 h-full bg-[#333] rounded-xl flex flex-col shadow-md transition-all duration-75 ">
+    <div className="w-48 h-full bg-[#333] cursor-pointer rounded-xl flex flex-col shadow-md transition-all duration-75 ">
       <img
         src="/got.jpg"
         className="w-full h-full object-cover rounded-t-xl"

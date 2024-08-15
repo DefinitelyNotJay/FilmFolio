@@ -10,7 +10,7 @@ import Comments from "./pages/admin/Comments";
 
 export default function App() {
   return (
-    <div className="h-full w-screen bg-[#242423] flex">
+    <div className="h-full w-screen bg-[#242423] flex font-Inter">
       <AdminSidebar />
       <div className="w-full">
         <AdminTopbar />

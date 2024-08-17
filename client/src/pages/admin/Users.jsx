@@ -66,6 +66,48 @@ export default function Users() {
       joined_date: "2024-03-02",
       email: "jonsnow@gmail.com",
     },
+    {
+      name: "Jon Snow",
+      username: "snow1231",
+      joined_date: "2024-03-02",
+      email: "jonsnow@gmail.com",
+    },
+    {
+      name: "Jon Snow",
+      username: "snow1231",
+      joined_date: "2024-03-02",
+      email: "jonsnow@gmail.com",
+    },
+    {
+      name: "Jon Snow",
+      username: "snow1231",
+      joined_date: "2024-03-02",
+      email: "jonsnow@gmail.com",
+    },
+    {
+      name: "Jon Snow",
+      username: "snow1231",
+      joined_date: "2024-03-02",
+      email: "jonsnow@gmail.com",
+    },
+    {
+      name: "Jon Snow",
+      username: "snow1231",
+      joined_date: "2024-03-02",
+      email: "jonsnow@gmail.com",
+    },
+    {
+      name: "Jon Snow",
+      username: "snow1231",
+      joined_date: "2024-03-02",
+      email: "jonsnow@gmail.com",
+    },
+    {
+      name: "Jon Snow",
+      username: "snow1231",
+      joined_date: "2024-03-02",
+      email: "jonsnow@gmail.com",
+    },
   ];
   return (
     <div className="px-2 py-4">

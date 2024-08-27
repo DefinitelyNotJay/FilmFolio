@@ -7,6 +7,7 @@ import Users from "./pages/admin/Users";
 import Movie from "./pages/admin/Movie";
 import Profile from "./pages/admin/Profile";
 import Comments from "./pages/admin/Comments";
+import EditMovie from "./pages/admin/EditMovie";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/users" element={<Users />} />
             <Route path="/movies" element={<Movie />} />
             <Route path="/comments" element={<Comments />} />
+            <Route path="/movie/:id" element={<EditMovie/>}/>
           </Routes>
         </div>
       </div>

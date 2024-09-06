@@ -2,6 +2,12 @@ import { ObjectId } from "mongodb";
 import { Comment, Movie, User } from "../model/Model.js";
 import { v2 as cloudinary } from "cloudinary";
 
+
+export async function getAllMovies(req, res, next) {
+  const movies = await Movie.find()
+  res.status(200).json(movies)
+}
+
 export async function getMovieFromId(req, res, next) {
   const { id } = req.params;
   const movie = await Movie.findOne({ _id: id });

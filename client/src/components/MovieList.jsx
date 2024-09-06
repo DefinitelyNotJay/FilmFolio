@@ -1,7 +1,14 @@
 import { Eye, Star, Heart } from "lucide-react";
-export default function MovieList() {
+import { useNavigate } from "react-router-dom";
+export default function MovieList({ id = 1, title="unknown" }) {
+  const navigate = useNavigate();
   return (
-    <div className="w-48 h-full bg-[#333] cursor-pointer rounded-xl flex flex-col shadow-md transition-all duration-75 ">
+    <div
+      className="w-48 h-full bg-[#333] cursor-pointer rounded-xl flex flex-col shadow-md transition-all duration-75"
+      onClick={() => {
+        navigate(`/movie/${id}`);
+      }}
+    >
       <img
         src="/got.jpg"
         className="w-full h-full object-cover rounded-t-xl"
@@ -9,19 +16,19 @@ export default function MovieList() {
       />
       <div className="px-2 py-2 bg-[#242423b9] rounded-b-xl">
         <p className="text-lg font-semibold text-[#E8EDDF] text-center">
-          Game of Thrones
+          {title.length > 12 ? title.slice(0, 13) + "..." : title}
         </p>
         <div className="flex mt-1 justify-evenly text-[#E8EDDF] text-sm">
           <div className="flex items-center">
-            <Eye className="fill-[#1b6874] stroke-[#242423]"/>
+            <Eye className="fill-[#1b6874] stroke-[#242423]" />
             {1200}
           </div>
           <div className="flex items-center">
-            <Star className="fill-[#55a572] stroke-[#242423]"/>
+            <Star className="fill-[#55a572] stroke-[#242423]" />
             {4}
           </div>
           <div className="flex items-center">
-            <Heart className="fill-[#fd8b7c] stroke-[#242423]"/>
+            <Heart className="fill-[#fd8b7c] stroke-[#242423]" />
             {30}
           </div>
         </div>
@@ -29,7 +36,6 @@ export default function MovieList() {
     </div>
   );
 }
-
 
 // black: {
 //     100: "#d3d3d3",

@@ -1,11 +1,10 @@
-import mongoose from "mongoose";
+import { MongoClient } from 'mongodb';
 
-const connectDB = async () => {
-  mongoose.connection.on("connected", () => {
-    console.log("connection successfully");
-  });
+// MongoClient now auto-connects so no need to store the connect()
+// promise anywhere and reference it.
+const client = new MongoClient(process.env.MONGO_URL);
 
-  await mongoose.connect(process.env.MONGO_URL);
+export const listDatabases = async () => {
+  const databases = await client.db('filmfolio').command({ listDatabases: 1 });
+  return databases;
 };
-
-export default connectDB;

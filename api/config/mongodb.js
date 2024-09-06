@@ -1,10 +1,19 @@
-import { MongoClient } from 'mongodb';
+import mongoose from "mongoose";
 
-// MongoClient now auto-connects so no need to store the connect()
-// promise anywhere and reference it.
-const client = new MongoClient(process.env.MONGO_URL);
+let cachedDb = null;
 
-export const listDatabases = async () => {
-  const databases = await client.db('filmfolio').command({ listDatabases: 1 });
-  return databases;
+export const connectToDatabase = async () => {
+  if (cachedDb) {
+    console.log('=> Using existing database connection');
+    return cachedDb;
+  }
+
+  console.log('=> Creating new database connection');
+  const db = await mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  cachedDb = db;
+  return cachedDb;
 };

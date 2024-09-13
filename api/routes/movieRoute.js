@@ -5,7 +5,8 @@ import {
   removeFavoriteMovie,
   createMovie,
   getAllMovies,
-  getAllCategories
+  getAllCategories,
+  editMovie
 } from "../controllers/movieController.js";
 import upload from "../middleware/multer.js";
 
@@ -16,6 +17,7 @@ router.get("/:id", getMovieFromId);
 router.get("/", getAllMovies);
 router.post("/create", upload.single("image"), createMovie);
 router.post("/delete/:id");
+router.post("/edit", editMovie);
 router.post("/favorite", addToFavoriteMovie);
 router.delete("/unfavorite", removeFavoriteMovie);
 

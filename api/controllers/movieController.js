@@ -13,8 +13,8 @@ export async function getMovieFromId(req, res, next) {
   res.status(200).json(movie);
 }
 export async function getAllCategories(req, res, next) {
-  console.log("hey")
-  const categories = await Category.find()
+  console.log("hey");
+  const categories = await Category.find();
   res.status(200).json(categories);
 }
 
@@ -52,6 +52,22 @@ export async function createMovie(req, res, next) {
       ...req.body,
       image: imageUpload.secure_url,
     });
+    res.json({ success: true });
+  } catch (err) {
+    res.json(err);
+  }
+}
+
+export async function editMovie(req, res, next) {
+  try {
+    await Movie.updateOne(
+      {
+        _id: req.body._id,
+      },
+      {
+        ...req.body,
+      }
+    );
     res.json({ success: true });
   } catch (err) {
     res.json(err);

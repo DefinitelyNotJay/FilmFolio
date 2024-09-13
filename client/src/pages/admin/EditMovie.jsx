@@ -7,8 +7,7 @@ import { useForm } from "react-hook-form";
 
 import { url } from "@/App";
 import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 export default function EditMovie() {
   const { id } = useParams();
   const [selectCategories, setSelectCategories] = useState([]);
@@ -22,15 +21,17 @@ export default function EditMovie() {
 
   const { register, handleSubmit } = useForm({
     defaultValues: async () => {
-      const {data} = await axios.get(`${url}/movie/${id}`);
-      setCategory(data.category)
-      return data
+      const { data } = await axios.get(`${url}/movie/${id}`);
+      setCategory(data.category);
+      return data;
     },
   });
 
   const submitHandler = async (data) => {
-    console.log(data);
-    console.log({ ...data, category: category });
+    const editData = { ...data, category: category };
+    await axios
+      .post(`${url}/movie/edit`, editData, { withCredentials: true })
+      .then((res) => window.location.reload());
   };
 
   return (
@@ -69,7 +70,6 @@ export default function EditMovie() {
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="category">Category</Label>
             <select
-              {...register("category")}
               className="outline-none border-none px-2 py-2 bg-[#333533] text-[#E8EDDF] rounded"
               onChange={(e) => {
                 setCategory((prev) => {
@@ -79,6 +79,7 @@ export default function EditMovie() {
                 });
               }}
             >
+              <option selected disabled>Choose one</option>
               {selectCategories.map((cate) => (
                 <option key={cate._id} value={cate.name}>
                   {cate.name}

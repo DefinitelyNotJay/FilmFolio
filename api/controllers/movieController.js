@@ -1,11 +1,21 @@
 import { ObjectId } from "mongodb";
-import { Comment, Movie, User } from "../model/Model.js";
+import { Category, Comment, Movie, User } from "../model/Model.js";
 import { v2 as cloudinary } from "cloudinary";
+
+export async function getAllMovies(req, res, next) {
+  const movies = await Movie.find();
+  res.status(200).json(movies);
+}
 
 export async function getMovieFromId(req, res, next) {
   const { id } = req.params;
   const movie = await Movie.findOne({ _id: id });
   res.status(200).json(movie);
+}
+export async function getAllCategories(req, res, next) {
+  console.log("hey");
+  const categories = await Category.find();
+  res.status(200).json(categories);
 }
 
 export async function addToFavoriteMovie(req, res, next) {
@@ -48,4 +58,18 @@ export async function createMovie(req, res, next) {
   }
 }
 
-
+export async function editMovie(req, res, next) {
+  try {
+    await Movie.updateOne(
+      {
+        _id: req.body._id,
+      },
+      {
+        ...req.body,
+      }
+    );
+    res.json({ success: true });
+  } catch (err) {
+    res.json(err);
+  }
+}

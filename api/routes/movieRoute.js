@@ -4,12 +4,14 @@ import {
   getMovieFromId,
   removeFavoriteMovie,
   createMovie,
-  getAllMovies
+  getAllMovies,
+  getAllCategories
 } from "../controllers/movieController.js";
 import upload from "../middleware/multer.js";
 
 const router = express.Router();
 
+router.get("/categories", getAllCategories);
 router.get("/:id", getMovieFromId);
 router.get("/", getAllMovies);
 router.post("/create", upload.single("image"), createMovie);

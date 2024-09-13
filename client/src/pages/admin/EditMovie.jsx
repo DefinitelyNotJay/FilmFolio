@@ -4,10 +4,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 import { url } from "@/App";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function EditMovie() {
   const { id } = useParams();
   const [selectCategories, setSelectCategories] = useState([]);
@@ -31,16 +44,22 @@ export default function EditMovie() {
     const editData = { ...data, category: category };
     await axios
       .post(`${url}/movie/edit`, editData, { withCredentials: true })
-      .then((res) => window.location.reload());
+      .then((res) => toast.success("Success!"));
   };
 
   return (
-    <div className="px-4 py-4">
+    <div className="px-6 py-6">
+       <ToastContainer
+        autoClose={2000}
+        closeOnClick
+        theme="dark"
+
+       />
       <h1 className="font-bold text-2xl text-[#e7e7e7]">Movies details</h1>
-      <div className="w-full">
+      <div className="w-full mt-4">
         <form
           onSubmit={handleSubmit(submitHandler)}
-          className="w-1/2 flex flex-col gap-3 text-[#e7e7e7]"
+          className="w-1/2 flex flex-col gap-6 text-[#e7e7e7]"
         >
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="title">Title</Label>
@@ -68,7 +87,7 @@ export default function EditMovie() {
             />
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="category">Category</Label>
+            <Label htmlFor="category">Categories</Label>
             <select
               className="outline-none border-none px-2 py-2 bg-[#333533] text-[#E8EDDF] rounded"
               onChange={(e) => {
@@ -79,7 +98,7 @@ export default function EditMovie() {
                 });
               }}
             >
-              <option selected disabled>Choose one</option>
+              <option selected disabled>Choose one or more</option>
               {selectCategories.map((cate) => (
                 <option key={cate._id} value={cate.name}>
                   {cate.name}
@@ -106,9 +125,14 @@ export default function EditMovie() {
               </div>
             )}
           </div>
-          <Button type="submit" className="bg-[#f5cb5c]">
+          <div className="flex gap-4">
+          <Button type="submit" className="bg-[#f5cb5c] w-fit">
             SAVE CHANGES
           </Button>
+          <Button variant={"destructive"} className="hover:bg-[#333]">
+            DELETE
+          </Button>
+          </div>
         </form>
         <div className="w-1/2"></div>
       </div>

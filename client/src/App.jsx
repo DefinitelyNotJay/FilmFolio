@@ -1,4 +1,4 @@
-import React from "react";
+
 import AdminSidebar from "./components/AdminSidebar";
 import AdminTopbar from "./components/AdminTopbar";
 import { Route, Routes } from "react-router-dom";
@@ -12,7 +12,6 @@ import EditMovie from "./pages/admin/EditMovie";
 export const url = "http://localhost:3000/api"
 
 export default function App() {
-  
   return (
     <div className="h-full w-screen bg-[#242423] flex font-Inter">
       <AdminSidebar />

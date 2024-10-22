@@ -8,13 +8,13 @@ import Movie from "./pages/admin/Movie";
 import Profile from "./pages/admin/Profile";
 import Comments from "./pages/admin/Comments";
 import EditMovie from "./pages/admin/EditMovie";
+import AddMovie from "./pages/admin/AddMovie";
 
 export const url = "http://localhost:3000/api"
 
 export default function App() {
-  
   return (
-    <div className="h-full w-screen bg-[#242423] flex font-Inter">
+    <div className="w-screen bg-[#242423] flex font-Inter">
       <AdminSidebar />
       <div className="w-full">
         <AdminTopbar />
@@ -26,6 +26,7 @@ export default function App() {
             <Route path="/movies" element={<Movie />} />
             <Route path="/comments" element={<Comments />} />
             <Route path="/movie/:id" element={<EditMovie/>}/>
+            <Route path="/movie/new" element={<AddMovie/>}/>
           </Routes>
         </div>
       </div>

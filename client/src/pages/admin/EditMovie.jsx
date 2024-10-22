@@ -43,7 +43,7 @@ export default function EditMovie() {
   const submitHandler = async (data) => {
     const editData = { ...data, category: category };
     await axios
-      .post(`${url}/movie/edit`, editData, { withCredentials: true })
+      .patch(`${url}/movie/edit`, editData, { withCredentials: true })
       .then((res) => toast.success("Success!"));
   };
 

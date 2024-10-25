@@ -20,7 +20,7 @@
 
 import mongoose from 'mongoose';
 
-export async function connectDB() {
+export default async function connectDB() {
 	if (mongoose.connection.readyState === 0) {
 		try {
 			await mongoose.connect(process.env.MONGO_URL);

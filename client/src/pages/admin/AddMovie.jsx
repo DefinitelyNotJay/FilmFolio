@@ -23,9 +23,15 @@ export default function AddMovie() {
 	const { register, handleSubmit } = useForm();
 
 	const submitHandler = async (data) => {
-		const createData = { ...data, category: category };
+		const createData = { ...data, image: data.image[0], category: category };
+		console.log(createData);
 		await axios
-			.post(`${url}/movie/create`, createData, { withCredentials: true })
+			.post(`${url}/movie/create`, createData, {
+				withCredentials: true,
+				headers: {
+					'Content-Type': 'multipart/form-data', // ระบุ Content-Type
+				},
+			})
 			.then((res) => toast.success('Success!'));
 	};
 
@@ -100,6 +106,15 @@ export default function AddMovie() {
 								))}
 							</div>
 						)}
+					</div>
+					<div className="grid w-full max-w-sm items-center gap-1.5">
+						<Label htmlFor="year">Image</Label>
+						<input
+							{...register('image')}
+							type="file"
+							name="image"
+							className="outline-none border-none px-2 bg-[#333533] text-[#E8EDDF] py-1 rounded"
+						/>
 					</div>
 					<div className="flex gap-4">
 						<Button type="submit" className="bg-[#f5cb5c] w-fit">

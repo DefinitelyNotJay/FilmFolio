@@ -1,6 +1,6 @@
 import { Eye, Star, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-export default function MovieList({ id = 1, title="unknown" }) {
+export default function MovieList({title="unknown", imgSrc}) {
   const navigate = useNavigate();
   return (
     <div
@@ -9,14 +9,16 @@ export default function MovieList({ id = 1, title="unknown" }) {
         navigate(`/movie/${id}`);
       }}
     >
+      
       <img
-        src="/got.jpg"
+        src={imgSrc}
         className="w-full h-full object-cover rounded-t-xl"
         alt=""
       />
       <div className="px-2 py-2 bg-[#242423b9] rounded-b-xl">
         <p className="text-lg font-semibold text-[#E8EDDF] text-center">
           {title.length > 12 ? title.slice(0, 13) + "..." : title}
+          
         </p>
         <div className="flex mt-1 justify-evenly text-[#E8EDDF] text-sm">
           <div className="flex items-center">
@@ -30,6 +32,7 @@ export default function MovieList({ id = 1, title="unknown" }) {
           <div className="flex items-center">
             <Heart className="fill-[#fd8b7c] stroke-[#242423]" />
             {30}
+            {imgSrc}
           </div>
         </div>
       </div>

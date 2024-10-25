@@ -1,11 +1,33 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 
-const connectDB = async () => {
-  mongoose.connection.on("connected", () => {
-    console.log("connection successfully");
-  });
+// let cachedDb = null;
 
-  await mongoose.connect(process.env.MONGO_URL);
-};
+// export const connectToDatabase = async () => {
+//   if (cachedDb) {
+//     console.log('=> Using existing database connection');
+//     return cachedDb;
+//   }
 
-export default connectDB;
+//   console.log('=> Creating new database connection');
+//   const db = await mongoose.connect(process.env.MONGO_URL, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   });
+
+//   cachedDb = db;
+//   return cachedDb;
+// };
+
+import mongoose from 'mongoose';
+
+export default async function connectDB() {
+	if (mongoose.connection.readyState === 0) {
+		try {
+			await mongoose.connect(process.env.MONGO_URL);
+      console.log("db success")
+		} catch (error) {
+			console.error('Error connecting to MongoDB:', error);
+			throw error;
+		}
+	}
+}

@@ -11,6 +11,9 @@ dependencies:
   aws-sdk:
     specifier: ^2.1690.0
     version: 2.1690.0
+  aws4:
+    specifier: ^1.13.2
+    version: 1.13.2
   cloudinary:
     specifier: ^2.4.0
     version: 2.4.0
@@ -1084,6 +1087,10 @@ packages:
       util: 0.12.5
       uuid: 8.0.0
       xml2js: 0.6.2
+    dev: false
+
+  /aws4@1.13.2:
+    resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
     dev: false
 
   /balanced-match@1.0.2:

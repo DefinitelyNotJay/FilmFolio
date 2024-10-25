@@ -1,4 +1,6 @@
 import { S3Client, PutObjectCommand, ListBucketsCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
 
 import dotenv from "dotenv"
 
@@ -34,4 +36,16 @@ export async function putObj(originalName, buffer, contentType){
         console.log(err)
         throw err
     }
+}
+
+
+export async function getImageUrl(key){
+    const getObjectParams = {
+        Bucket: bucketName,
+        Key: key
+    }
+    const command = new GetObjectCommand(getObjectParams)
+    const url = await getSignedUrl(s3, command, { expiresIn: 36000 });
+    // console.log(url)
+    return url
 }

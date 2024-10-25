@@ -32,7 +32,6 @@ export default function MovieList({title="unknown", imgSrc}) {
           <div className="flex items-center">
             <Heart className="fill-[#fd8b7c] stroke-[#242423]" />
             {30}
-            {imgSrc}
           </div>
         </div>
       </div>

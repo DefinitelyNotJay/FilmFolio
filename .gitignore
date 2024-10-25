@@ -41,3 +41,5 @@ jspm_packages
 
 #Excluding build directory
 public/
+
+api/node_modules

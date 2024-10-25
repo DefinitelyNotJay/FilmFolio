@@ -1,4 +1,4 @@
-import React from "react";
+
 import AdminSidebar from "./components/AdminSidebar";
 import AdminTopbar from "./components/AdminTopbar";
 import { Route, Routes } from "react-router-dom";
@@ -8,6 +8,8 @@ import Movie from "./pages/admin/Movie";
 import Profile from "./pages/admin/Profile";
 import Comments from "./pages/admin/Comments";
 import EditMovie from "./pages/admin/EditMovie";
+
+export const url = "http://localhost:3000/api"
 
 export default function App() {
   return (

@@ -1,17 +1,12 @@
-FROM node:20 AS build
+FROM node:18
 
+COPY package*.json pnpm-lock.yaml ./
 RUN npm install -g pnpm
-
-COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
 COPY . .
-RUN pnpm run build
 
-FROM nginx:alpine
+EXPOSE 5173
 
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "index.js"] # เปลี่ยน index.js เป็นชื่อไฟล์หลักของ Express app

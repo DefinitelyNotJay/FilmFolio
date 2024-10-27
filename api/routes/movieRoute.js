@@ -20,7 +20,7 @@ router.get("/:id", getMovieFromId);
 router.get("/", getAllMovies);
 router.post("/create", upload.single("image"), createMovie);
 router.post("/delete/:id");
-router.patch("/edit", editMovie);
+router.patch("/edit",upload.single("image"), editMovie);
 router.post("/favorite", addToFavoriteMovie);
 router.delete("/unfavorite", removeFavoriteMovie);
 

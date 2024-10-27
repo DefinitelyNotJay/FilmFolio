@@ -1,6 +1,5 @@
 import { getImageUrl, putObj } from '../config/s3.js';
 import { Category, Comment, Movie, User } from '../model/Model.js';
-import { S3Client, ListBucketsCommand } from '@aws-sdk/client-s3';
 
 export async function getAllMovies(req, res, next) {
 	let movies = await Movie.find({ image: { $ne: null } }).lean();

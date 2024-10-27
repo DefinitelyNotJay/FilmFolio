@@ -8,7 +8,10 @@ import {
   getAllCategories,
   editMovie
 } from "../controllers/movieController.js";
-import upload from "../middleware/multer.js";
+import multer from "multer";
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage})
 
 const router = express.Router();
 

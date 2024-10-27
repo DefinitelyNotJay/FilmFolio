@@ -19,7 +19,7 @@ export default function Movie() {
       </div>
       {data &&
         data.map((movie) => (
-          <MovieList key={movie._id} id={movie._id} title={movie.title} />
+          <MovieList key={movie._id} title={movie.title} imgSrc={movie.imgUrl}/>
         ))}
     </div>
   );

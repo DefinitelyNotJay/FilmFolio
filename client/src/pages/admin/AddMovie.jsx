@@ -25,6 +25,7 @@ export default function AddMovie() {
 
 	const submitHandler = async (data) => {
 		const createData = { ...data, image: data.image[0], category: category };
+		console.log(createData);
 		await axios
 			.post(`${url}/movie/create`, createData, {
 				withCredentials: true,

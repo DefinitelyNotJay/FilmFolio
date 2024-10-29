@@ -1,3 +1,45 @@
+# name: filmfolio
+
+# version: '3'
+
+# services:
+#   frontend:
+#     build:
+#       context: ./client
+#       dockerfile: Dockerfile
+#     restart: unless-stopped
+#     ports:
+#       - "5173:5173" # Nginx serve ที่พอร์ต 80 ของ container
+#     volumes:
+#       - ./client:/app
+#       - /app/node_modules
+#     depends_on:
+#       - backend
+#     networks:
+#       - app-network
+#     command: ["pnpm", "dev", "--", "--host"]  # เพิ่มคำสั่งนี้ถ้ายังไม่มี
+
+
+#   backend:
+#     build:
+#       context: ./api
+#       dockerfile: Dockerfile
+#     restart: unless-stopped
+#     env_file:
+#       - ./api/.env
+#     volumes:
+#       - ./api/:/app
+#       - /app/node_modules
+#     ports:
+#       - "3000:3000" # Mapping port 5000 บน host กับ container
+#     networks:
+#       - app-network
+#     command: ["pnpm", "dev"]  # เพิ่มคำสั่งนี้ถ้ายังไม่มี
+
+# networks:
+#   app-network:
+#     driver: bridge
+
 name: filmfolio
 
 version: '3'
@@ -7,9 +49,10 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+    image: tendou26/filmfolio-frontend:latest  # เพิ่มชื่อ image ที่ตรงกับ Docker Hub
     restart: unless-stopped
     ports:
-      - "5173:5173" # Nginx serve ที่พอร์ต 80 ของ container
+      - "5173:5173"
     volumes:
       - ./client:/app
       - /app/node_modules
@@ -17,13 +60,13 @@ services:
       - backend
     networks:
       - app-network
-    command: ["pnpm", "dev", "--", "--host"]  # เพิ่มคำสั่งนี้ถ้ายังไม่มี
-
+    command: ["pnpm", "dev", "--", "--host"]
 
   backend:
     build:
       context: ./api
       dockerfile: Dockerfile
+    image: tendou26/filmfolio-backend:latest  # เพิ่มชื่อ image ที่ตรงกับ Docker Hub
     restart: unless-stopped
     env_file:
       - ./api/.env
@@ -31,10 +74,10 @@ services:
       - ./api/:/app
       - /app/node_modules
     ports:
-      - "3000:3000" # Mapping port 5000 บน host กับ container
+      - "3000:3000"
     networks:
       - app-network
-    command: ["pnpm", "dev"]  # เพิ่มคำสั่งนี้ถ้ายังไม่มี
+    command: ["pnpm", "dev"]
 
 networks:
   app-network:

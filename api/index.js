@@ -24,7 +24,7 @@ app.use("/api/movie", movieRoute);
 app.use("/api/comment", commentRoute);
 
 
-// await connectDB()
+
 async function connectDB() {
 	if (mongoose.connection.readyState === 0) {
 		try {
@@ -36,6 +36,7 @@ async function connectDB() {
 		}
 	}
 }
+await connectDB()
 
 // Export Lambda Handler
 export const handler = async (event, context) => {

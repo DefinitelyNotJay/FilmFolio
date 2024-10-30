@@ -2,12 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import movieRoute from "./routes/movieRoute.js";
 import commentRoute from "./routes/commentRoute.js";
-import { putItem } from "./config/dynamodb.js";
 import serverless from "serverless-http";
 import cors from "cors";
 import { connectDB } from "./config/mongodb.js";
 import { Comment, User } from "./model/Model.js";
-import { MongoClient } from "mongodb";
 
 const app = express();
 dotenv.config();

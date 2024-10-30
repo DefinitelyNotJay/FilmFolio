@@ -4,6 +4,7 @@ import movieRoute from "./routes/movieRoute.js";
 import commentRoute from "./routes/commentRoute.js";
 import serverless from "serverless-http";
 import cors from "cors";
+import mongoose from "mongoose";
 
 import { Comment, User } from "./model/Model.js";
 

@@ -4,7 +4,7 @@ import movieRoute from "./routes/movieRoute.js";
 import commentRoute from "./routes/commentRoute.js";
 import serverless from "serverless-http";
 import cors from "cors";
-import { connectDB } from "./config/mongodb.js";
+
 import { Comment, User } from "./model/Model.js";
 
 const app = express();
@@ -25,6 +25,17 @@ app.use("/api/comment", commentRoute);
 
 
 // await connectDB()
+async function connectDB() {
+	if (mongoose.connection.readyState === 0) {
+		try {
+			await mongoose.connect(process.env.MONGO_URL);
+      console.log("db success")
+		} catch (error) {
+			console.error('Error connecting to MongoDB:', error);
+			throw error;
+		}
+	}
+}
 
 // Export Lambda Handler
 export const handler = async (event, context) => {

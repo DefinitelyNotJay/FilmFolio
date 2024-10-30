@@ -37,7 +37,12 @@ async function connectDB() {
 		}
 	}
 }
-await connectDB()
+
+
+app.listen("3000", async () => {
+  await connectDB()
+  console.log(`server start on port ${process.env.PORT}`);
+});
 
 // Export Lambda Handler
 export const handler = async (event, context) => {

@@ -4,16 +4,15 @@ import { useFetch } from '@/hooks/useFetch';
 import { url } from '@/App';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
 
 export default function Movie() {
-	const { data, loading, error } = useFetch(`${url}/movie`);
+	const [data, setData] = useState([]);
 	useEffect(() => {
-    
-  }, []);
-	console.log(`${url}/movie`);
-	console.log(loading);
-	console.log(error);
-	console.log(data);
+		axios.get(`${url}/movie/`).then((res) => setData(res.data));
+	}, []);
+
 	const navigate = useNavigate();
 	return (
 		<div className="px-4 py-4 grid xl:grid-cols-5 lg:grid-cols-2 mx-auto justify-items-center gap-y-8">

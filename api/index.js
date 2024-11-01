@@ -12,12 +12,7 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
-app.use(cors({
-  origin: 'https://filmfolio.site',
-  credentials: true
-}));
-
-
+app.use(cors());
 
 app.get("/", async (req, res, next) => {
   const comments = await User.find();
@@ -26,7 +21,6 @@ app.get("/", async (req, res, next) => {
 
 app.use("/api/movie", movieRoute);
 app.use("/api/comment", commentRoute);
-
 
 
 async function connectDB() {

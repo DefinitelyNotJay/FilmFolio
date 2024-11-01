@@ -11,7 +11,13 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+	cors({
+		origin: '*', // หรือ '*' เพื่ออนุญาตทุกโดเมน
+		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+		credentials: true,
+	})
+);
 
 app.get('/', async (req, res, next) => {
 	const comments = await User.find();

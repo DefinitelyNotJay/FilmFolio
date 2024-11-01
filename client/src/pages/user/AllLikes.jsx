@@ -1,9 +1,14 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import SearchBar from '../../components/SearchBar';
 
 function AllLikes() {
     return(
         <div className="w-full h-[844px] bg-[#242423] text-white overflow-y-auto justify-center px-4 py-4">
             {/* grid */}
+            <div className="py-4">
+                <SearchBar />
+                {/* Other components */}
+            </div>
             <div className="grid grid-cols-3 gap-3">
                 {/* Movie Card */}
                 <div className="flex flex-col item-center w-full rounded-lg">

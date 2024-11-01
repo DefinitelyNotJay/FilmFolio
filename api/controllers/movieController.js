@@ -13,7 +13,7 @@ export async function getAllMovies(req, res, next) {
 		}
 	}
 
-	console.log(movies[0]);
+	console.log(movies);
 
 	res.status(200).json(movies);
 }

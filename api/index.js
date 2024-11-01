@@ -12,7 +12,10 @@ dotenv.config();
 
 app.use(express.json());
 app.use(
-	cors()
+	cors({
+    origin: "http://http://54.80.58.214",
+    credentials: true
+  })
 );
 
 app.get('/', async (req, res, next) => {

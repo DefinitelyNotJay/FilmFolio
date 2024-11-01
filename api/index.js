@@ -6,7 +6,7 @@ import serverless from "serverless-http";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import { Comment, User } from "./model/Model.js";
+import { Comment, Movie, User } from "./model/Model.js";
 
 const app = express();
 dotenv.config();
@@ -42,6 +42,7 @@ async function connectDB() {
 app.listen("3000", async () => {
   await connectDB()
   console.log(`server start on port ${process.env.PORT}`);
+  console.log("Query", await Movie.find())
 });
 
 // Export Lambda Handler

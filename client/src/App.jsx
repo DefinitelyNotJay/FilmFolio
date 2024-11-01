@@ -9,7 +9,7 @@ import Comments from "./pages/admin/Comments";
 import EditMovie from "./pages/admin/EditMovie";
 import AddMovie from "./pages/admin/AddMovie";
 const host = window.location.host
-export const url = "http://localhost:3000/api"
+export const url = "http://54.80.58.214:3000/api"
 
 export default function App() {
   return (

@@ -39,9 +39,9 @@ async function connectDB() {
 	}
 }
 
-app.listen('3000', async () => {
+app.listen('3200', async () => {
 	await connectDB();
-	console.log(`server start on port ${process.env.PORT}`);
+	console.log(`server start on port 3200`);
 	console.log('Query', await Movie.find());
 });
 

@@ -3,9 +3,11 @@ import { Plus } from 'lucide-react';
 import { useFetch } from '@/hooks/useFetch';
 import { url } from '@/App';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Movie() {
 	const { data, loading, error } = useFetch(`${url}/movie`);
+  useEffect(()=>{}, [])
   console.log(`${url}/movie`)
   console.log(loading)
   console.log(error)

@@ -13,7 +13,7 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://filmfolio.site',
+  origin: 'https://filmfolio.site',
   credentials: true
 }));
 

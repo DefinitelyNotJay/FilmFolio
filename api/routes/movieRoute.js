@@ -24,4 +24,5 @@ router.patch("/edit", editMovie);
 router.post("/favorite", addToFavoriteMovie);
 router.delete("/unfavorite", removeFavoriteMovie);
 
+
 export default router;

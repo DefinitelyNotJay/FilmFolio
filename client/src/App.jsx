@@ -10,7 +10,7 @@ import Comments from "./pages/admin/Comments";
 import EditMovie from "./pages/admin/EditMovie";
 import AddMovie from "./pages/admin/AddMovie";
 
-export const url = "http://12.0.141.161:3000/api"
+export const url = "https://12.0.141.161:3000/api"
 
 export default function App() {
   return (

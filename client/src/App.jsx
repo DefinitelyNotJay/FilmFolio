@@ -9,6 +9,7 @@ import AddMovie from "./pages/admin/AddMovie";
 import HomeUser from "./pages/user/HomeUser";
 import AdminLayout from "./pages/admin/AdminLayout";
 import UserLayout from "./pages/user/UserLayout";
+import AllLikes from "./pages/user/AllLikes";
 
 export const url = "http://localhost:3000/api";
 
@@ -29,6 +30,7 @@ export default function App() {
       {/* User Routes */}
       <Route element={<UserLayout />}>
         <Route path="/home" element={<HomeUser />} />
+        <Route path="/alllikes" element={<AllLikes />} />
         {/* Add other user routes here */}
       </Route>
     </Routes>

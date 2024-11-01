@@ -12,10 +12,7 @@ dotenv.config();
 
 app.use(express.json());
 app.use(
-	cors({
-		origin: '*', // หรือ '*' เพื่ออนุญาตทุกโดเมน
-		credentials: true,
-	})
+	cors()
 );
 
 app.get('/', async (req, res, next) => {

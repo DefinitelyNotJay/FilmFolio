@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(
 	cors({
 		origin: '*', // หรือ '*' เพื่ออนุญาตทุกโดเมน
-		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 		credentials: true,
 	})
 );
@@ -39,9 +38,9 @@ async function connectDB() {
 	}
 }
 
-app.listen('3200', async () => {
+app.listen('3000', async () => {
 	await connectDB();
-	console.log(`server start on port 3200`);
+	console.log(`server start on port 3000`);
 	console.log('Query', await Movie.find());
 });
 

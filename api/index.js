@@ -5,18 +5,13 @@ import commentRoute from './routes/commentRoute.js';
 import serverless from 'serverless-http';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
 import { Comment, Movie, User } from './model/Model.js';
 
 const app = express();
 dotenv.config();
 
 app.use(express.json());
-app.use(
-	cors({
-		origin: 'http://54.80.58.214',
-	})
-);
+app.use(cors());
 
 app.get('/', async (req, res, next) => {
 	const comments = await User.find();
@@ -38,7 +33,7 @@ async function connectDB() {
 	}
 }
 
-app.listen('3200', async () => {
+app.listen('3000', async () => {
 	await connectDB();
 	console.log(`server start on port ${process.env.PORT}`);
 	console.log('Query', await Movie.find());

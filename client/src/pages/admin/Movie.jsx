@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Movie() {
 	const { data, loading, error } = useFetch(`${url}/movie`);
+  console.log(`${url}/movie`)
   console.log(loading)
   console.log(error)
   console.log(data)

@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/userContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../App";
+import { url } from "@/App";
+
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -20,11 +21,11 @@ const Login = () => {
         e.preventDefault();
         dispatch({ type: "LOGIN_START" });
         try {
-            const res = await axios.post(`${api}/api/auth/login`, credentials);
+            const res = await axios.post(`${url}/auth/login`, credentials);
             const { isAdmin } = res.data;
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
             if (isAdmin) {
-                navigate("/admin");
+                navigate("/");
             } else {
                 navigate("/home");
             }

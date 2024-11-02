@@ -2,7 +2,7 @@ import { AuthContext } from "../../../context/userContext";
 import { useContext, useState } from "react";
 
 
-export default function Home() {
+export default function HomeUserTest() {
     const { user } = useContext(AuthContext);
     return (
         <div>

@@ -82,6 +82,4 @@ module.exports = {
         kanit: ['Kanit', 'sans-serif'],
       },
     },
-  },
-  plugins: [],
-}
+  }

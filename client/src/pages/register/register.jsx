@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../../context/userContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../App";
+import { url } from "@/App";
 
 const Register = () => {
     const [credentials, setCredentials] = useState({
@@ -22,7 +22,7 @@ const Register = () => {
         e.preventDefault();
         dispatch({ type: "LOGIN_START" });
         try {
-            await axios.post(`${api}/api/auth/register`, credentials);
+            await axios.post(`${url}/auth/register`, credentials);
             dispatch({ type: "REGISTER_SUCCESS" });
             navigate("/login");
         } catch (error) {

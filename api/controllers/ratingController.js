@@ -1,63 +1,41 @@
 import mongoose from "mongoose";
 import { User } from "../model/Model.js";
-import { Comment } from "../model/Model.js";
+import { Rating } from "../model/Model.js";
 
 
 export async function addRatingMovie(req, res, next) {
-	const { movieId, userId, comment } = req.body;
+	const { movieId, userId, rating } = req.body;
 
-	if (!movieId || !userId || !comment) {
-		return res.status(400).json({ message: 'movieId, userId, and comment are required' });
+	if (!movieId || !userId || rating == null) {
+	  return res.status(400).json({ message: 'movieId, userId, and rating are required' });
 	}
-
+	
 	try {
-		const updatedUser = await User.findOneAndUpdate(
-			{ _id: userId },
-			{
-				$push: {
-					comments: {
-						text: comment,
-						movie: movieId
-					}
-				}
-			},
-			{ new: true }
-		);
-
-		if (!updatedUser) {
-			return res.status(404).json({ message: 'User not found' });
-		}
-
-		res.status(200).json(updatedUser);
+	  const newRating = await Rating.create({
+		movieId,
+		userId,
+		rating,
+	  });
+	  res.status(201).json(newRating);
 	} catch (error) {
-		console.error('Error adding comment:', error);
-		return res.status(500).json({ message: 'Failed to add comment' });
+	  res.status(500).json({ message: 'Error creating rating', error });
 	}
 }
 
 
 export async function removeRatingMovie(req, res, next) {
     try {
-        const { commentId, userId } = req.body;
-
-        if (!commentId || !userId) {
-            return res.status(400).json({ message: 'Missing required fields' });
+        const { rating_id } = req.params;
+        if (!rating_id) {
+            return res.status(400).json({ message: "Rating ID is required" });
         }
-
-        const user = await User.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { comments: { _id: commentId } } },
-        );
-
-        if (!user) {
-            return res.status(404).json({ message: 'User or comment not found' });
-        }
-
-        res.status(200).json({ message: 'Comment removed successfully', user });
+        const result = await Rating.deleteOne({ _id: rating_id });
+        res.status(200).json({ message: "Rating deleted successfully" });
     } catch (error) {
         next(error);
     }
 }
+
 
 export async function getRatingFromMovieId(req, res, next) {
 	// try {
@@ -72,13 +50,8 @@ export async function getRatingFromMovieId(req, res, next) {
 export async function getRatingFromUserId(req, res, next) {
     try {
         const { user_id } = req.params; 
-        const user = await User.findById(user_id).select('comments');  // Use `user_id` here as well
-        
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        res.json(user.comments);
+        const rating = await Rating.find({userId : user_id}).populate("movieId", "title year").populate("userId", "username").exec();
+        res.json(rating);
     } catch (error) {
         next(error);
     }

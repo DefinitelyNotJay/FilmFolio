@@ -1,6 +1,7 @@
 import { TbEye } from "react-icons/tb";
 import { useEffect, useState } from 'react';
 import { url } from "@/App";
+import { useNavigate } from "react-router-dom";
 
 function HomeUser() {
   const [movies, setMovies] = useState([]);
@@ -8,6 +9,7 @@ function HomeUser() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(true); // กำหนดให้ loading เป็น true ครั้งแรกที่โหลด
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -32,6 +34,7 @@ function HomeUser() {
             throw new Error('Failed to fetch movies');
           }
           const data = await response.json();
+          console.log(data)
           setMovies(data);
         } catch (error) {
           setError(error.message);
@@ -109,7 +112,6 @@ function HomeUser() {
             key={category.name}
             onClick={() => {
               setSelectedCategory(category.name)
-              console.log(123, selectedCategory, category.name)
             }}
             className={`py-2 px-4 rounded-full transition-colors duration-300 ${
               selectedCategory === category.name
@@ -128,6 +130,9 @@ function HomeUser() {
           <div
             key={index}
             className="flex flex-col items-center w-full rounded-lg text-white bg-[#201d1d] pb-3 shadow-3xl"
+            onClick={()=>{
+              navigate(`/movie/detail/${movie._id}`)
+            }}
           >
             <img
               className="w-full rounded-xl"

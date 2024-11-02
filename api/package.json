@@ -12,8 +12,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+=======
+    "@aws-sdk/client-dynamodb": "^3.645.0",
+    "@aws-sdk/client-s3": "^3.679.0",
+    "@aws-sdk/s3-request-presigner": "^3.679.0",
+    "aws-sdk": "^2.1690.0",
+    "aws4": "^1.13.2",
+>>>>>>> b0065d153fa11d47212a486a9abdc5f93971285e
     "cloudinary": "^2.4.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -24,8 +32,13 @@
     "mongoose": "^8.5.2",
     "multer": "1.4.5-lts.1",
     "nodemon": "^3.1.4",
+<<<<<<< HEAD
     "react-hot-toast": "^2.4.1",
     "react-toastify": "^10.0.5"
+=======
+    "react-hook-form": "^7.53.0",
+    "serverless-http": "^3.2.0"
+>>>>>>> b0065d153fa11d47212a486a9abdc5f93971285e
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

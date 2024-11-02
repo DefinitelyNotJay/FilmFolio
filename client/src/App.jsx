@@ -16,7 +16,7 @@ import Admin from "./pages/admin/admin";
 import UserProfile from "./pages/user/UserProfile";
 import MovieDetail from "./pages/user/MovieDetail";
 
-export const url = "http://localhost:3000/api";
+export const url = "http://3.90.166.170:3000/api";
 
 export default function App() {
   return (

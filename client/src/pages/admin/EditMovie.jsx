@@ -30,9 +30,14 @@ export default function EditMovie() {
 	});
 
 	const submitHandler = async (data) => {
-		const editData = { ...data, category: category };
+		const editData = { ...data, category: category, image: data.image[0] };
 		await axios
-			.patch(`${url}/movie/edit`, editData, { withCredentials: true })
+			.patch(`${url}/movie/edit`, editData, {
+				withCredentials: true,
+				headers: {
+					'Content-Type': 'multipart/form-data', // ระบุ Content-Type
+				},
+			})
 			.then((res) => toast.success('Success!'));
 	};
 
@@ -105,6 +110,18 @@ export default function EditMovie() {
 								))}
 							</div>
 						)}
+					</div>
+					<div className="grid w-full max-w-sm items-center gap-1.5">
+						<Label htmlFor="year">Image</Label>
+						<input
+							{...register('image')}
+							type="file"
+							name="image"
+							className="outline-none border-none px-2 bg-[#333533] text-[#E8EDDF] py-1 rounded"
+							onChange={(e) => {
+								setImage(URL.createObjectURL(e.target.files[0]));
+							}}
+						/>
 					</div>
 					<div className="flex gap-4">
 						<Button type="submit" className="bg-[#f5cb5c] w-fit">

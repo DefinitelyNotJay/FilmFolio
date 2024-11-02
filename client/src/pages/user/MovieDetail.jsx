@@ -1,7 +1,5 @@
 import { useParams } from 'react-router-dom';
 import {
-	ThumbsUp,
-	ThumbsDown,
 	CircleUserRound,
 	Star,
 	MessageSquarePlus,

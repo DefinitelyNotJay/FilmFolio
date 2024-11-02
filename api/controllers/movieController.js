@@ -52,18 +52,12 @@ export async function getAllCategories(req, res, next) {
 export async function addToFavoriteMovie(req, res, next) {
 	const { movieId, userId } = req.body;
 	const user = await User.findOneAndUpdate({ _id: userId }, { $push: { favorites: movieId } });
-	if (user) {
-		console.log(user);
-	}
 	res.status(200).json(user);
 }
 
 export async function removeFavoriteMovie(req, res, next) {
 	const { movieId, userId } = req.body;
 	const user = await User.findOneAndUpdate({ _id: userId }, { $pull: { favorites: movieId } });
-	if (user) {
-		console.log(user);
-	}
 	res.status(200).json(user);
 }
 
@@ -86,6 +80,9 @@ export async function createMovie(req, res, next) {
 }
 
 export async function editMovie(req, res, next) {
+	const movieDetail = req.body;
+	const movieImage = req.file;
+	console.log(movieImage, movieDetail)
 	try {
 		await Movie.updateOne(
 			{

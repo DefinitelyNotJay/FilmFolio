@@ -13,7 +13,7 @@ import Register from "./pages/register/register";
 import Login from "./pages/login/login";
 import Admin from "./pages/admin/admin";
 import HomeUserTest from "./pages/home/home";
-
+import UserProfile from "./pages/user/UserProfile";
 export const url = "http://localhost:3000/api";
 
 export default function App() {
@@ -21,7 +21,6 @@ export default function App() {
     <Routes>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/home" element={<HomeUserTest />} />
       <Route path="/admin" element={<Admin />} />
       {/* Admin Routes */}
       <Route element={<AdminLayout />}>
@@ -37,6 +36,7 @@ export default function App() {
       {/* User Routes */}
       <Route element={<UserLayout />}>
         <Route path="/home" element={<HomeUser />} />
+        <Route path="/userprofile" element={<UserProfile />} />
         {/* Add other user routes here */}
       </Route>
     </Routes>

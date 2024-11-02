@@ -2,12 +2,12 @@ import express from "express";
 import {
   addToFavoriteMovie,
   getMovieFromId,
-  removeFavoriteMovie,
   createMovie,
   getAllMovies,
   getMovieInCategory,
   getAllCategories,
-  editMovie
+  editMovie,
+  deleteMovie
 } from "../controllers/movieController.js";
 import multer from "multer";
 
@@ -21,10 +21,9 @@ router.get("/movieincategory/:cate", getMovieInCategory);
 router.get("/:id", getMovieFromId);
 router.get("/", getAllMovies);
 router.post("/create", upload.single("image"), createMovie);
-router.post("/delete/:id");
-router.patch("/edit", editMovie);
+router.patch("/edit", upload.single("image"), editMovie);
 router.post("/favorite", addToFavoriteMovie);
-router.delete("/unfavorite", removeFavoriteMovie);
+router.delete("/:id", deleteMovie)
 
 
 export default router;

@@ -56,6 +56,9 @@ export async function getAllCategories(req, res, next) {
 	res.status(200).json(categories);
 }
 
+
+
+
 export async function addToFavoriteMovie(req, res, next) {
 	const { movieId, userId } = req.body;
 	const user = await User.findOneAndUpdate({ _id: userId }, { $push: { favorites: movieId } });

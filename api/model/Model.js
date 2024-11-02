@@ -7,10 +7,18 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
+    comments: [
+      {
+        text: { type: String, required: true },
+        movie: { type: mongoose.Schema.Types.ObjectId, ref: "Movie", required: true },
+        createdAt: { type: Date, default: Date.now }
+      }
+    ],
     isAdmin: { type: Boolean, default:  false},
   },
   { timestamps: true }
 );
+
 
 const User = mongoose.model("User", userSchema);
 
@@ -53,6 +61,28 @@ const commentSchema = new mongoose.Schema(
 
 const Comment = mongoose.model("Comment", commentSchema);
 
+
+// Schema สำหรับrating
+const ratingSchema = new mongoose.Schema(
+  {
+    movieId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Movie",
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    rating: { type: Number, default: 0 },
+    created_at: { type: Date, default: Date.now },
+  },
+  { timestamps: true }
+);
+
+const Rating = mongoose.model("Rating", ratingSchema);
+
 // Schema สำหรับสถิติของภาพยนตร์
 const statsSchema = new mongoose.Schema(
   {
@@ -84,4 +114,4 @@ const categorySchema = new mongoose.Schema(
 
 const Category = mongoose.model("Category", categorySchema);
 
-export { Category, Comment, Movie, Stats, User };
+export { Category, Comment, Movie, Stats, User, Rating };

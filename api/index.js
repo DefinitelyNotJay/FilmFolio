@@ -31,6 +31,7 @@ app.use("/api/movie", movieRoute);
 app.use("/api/comment", commentRoute);
 app.use("/api/movie", movieRoute);
 app.use("/api/comment", commentRoute);
+app.use("/api/rating", commentRoute);
 
 
 // await connectDB()

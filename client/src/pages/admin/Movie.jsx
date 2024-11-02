@@ -8,7 +8,7 @@ export default function Movie() {
   const { data, loading, error } = useFetch(`${url}/movie`);
   const navigate = useNavigate();
   return (
-    <div className="px-4 py-4 grid xl:grid-cols-5 lg:grid-cols-2 mx-auto justify-items-center gap-y-8">
+    <div className="px-4 py-4 grid xl:grid-cols-5 lg:grid-cols-2 justify-items-center gap-y-8">
       <div
         onClick={() => {
           navigate("/movie/new");

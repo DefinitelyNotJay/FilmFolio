@@ -1,18 +1,12 @@
 import { useParams } from 'react-router-dom';
-import {
-	CircleUserRound,
-	Star,
-	MessageSquarePlus,
-	X,
-	Check,
-} from 'lucide-react';
+import { CircleUserRound, Star, MessageSquarePlus, X, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { url } from '@/App';
 import { useContext } from 'react';
-import {AuthContext} from "../../../context/userContext"
+import { AuthContext } from '../../../context/userContext';
 
 const MovieDetail = () => {
 	const { id } = useParams();
@@ -27,6 +21,7 @@ const MovieDetail = () => {
 		axios.get(`${url}/movie/${id}`).then((res) => {
 			setMovieData(res.data.movie);
 			setImageUrl(res.data.imageUrl);
+			setOpenComment(false);
 		});
 	}, [id]);
 	return movieData ? (

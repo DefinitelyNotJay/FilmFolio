@@ -1,11 +1,24 @@
 import MovieList from '../../components/MovieList';
 import { Plus } from 'lucide-react';
-import { useFetch } from '@/hooks/useFetch';
 import { url } from '@/App';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+
 
 export default function Movie() {
-	const { data, loading, error } = useFetch(`${url}/movie`);
+	const [data, setData] = useState([]);
+	useEffect(() => {
+		axios.get(`${url}/movie`).then((res) => {
+			console.log(res.data);
+			setData(res.data);
+		});
+	}, []);
+	console.log(data);
+	data.forEach(movie=>{
+		console.log(movie.imgUrl)
+	})
 	const navigate = useNavigate();
 	return (
 		<div className="px-4 py-4 grid xl:grid-cols-5 lg:grid-cols-2 mx-auto justify-items-center gap-y-8">

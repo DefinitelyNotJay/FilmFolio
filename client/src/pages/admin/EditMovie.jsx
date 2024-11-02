@@ -9,20 +9,26 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function EditMovie() {
 	const { id } = useParams();
 	const [selectCategories, setSelectCategories] = useState([]);
 	const [category, setCategory] = useState([]);
 	const [image, setImage] = useState();
+	const navigate = useNavigate()
 
 	useEffect(() => {
-		axios.get(`${url}/movie/categories`).then((res) => setSelectCategories(res.data));
+		axios.get(`${url}/movie/categories`).then((res) => {
+			setSelectCategories(res.data);
+		});
 	}, []);
 
 	const { register, handleSubmit } = useForm({
 		defaultValues: async () => {
 			const res = await axios.get(`${url}/movie/${id}`);
+			console.log(res.data);
 			setImage(res.data.imageUrl);
 			setCategory(res.data.movie.category);
 			return res.data.movie;
@@ -127,7 +133,18 @@ export default function EditMovie() {
 						<Button type="submit" className="bg-[#f5cb5c] w-fit">
 							SAVE CHANGES
 						</Button>
-						<Button variant={'destructive'} className="hover:bg-[#333]">
+						<Button
+							type="button"
+							onClick={async () => {
+								await axios.delete(`${url}/movie/${id}`)
+									.then(res=>{
+										toast.success('Success!')
+										navigate("/movies")
+									})
+							}}
+							variant={'destructive'}
+							className="hover:bg-[#333]"
+						>
 							DELETE
 						</Button>
 					</div>

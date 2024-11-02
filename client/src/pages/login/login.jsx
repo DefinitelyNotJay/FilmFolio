@@ -44,7 +44,7 @@ const Login = () => {
 			style={{ backgroundImage: "url('https://pbs.twimg.com/media/FsURmoXakAEizoE.jpg:large')" }}
 		>
 			<div className="bg-white bg-opacity-90 shadow-2xl rounded-lg p-8 w-72 max-w-md">
-				<h2 className="text-xl font-bold text-center text-gray-800 mb-8">เข้าสู่ระบบ</h2>
+				<h2 className="text-xl font-bold text-center text-gray-800 mb-8">เข้าสู่ระบบ2</h2>
 				<input
 					type="text"
 					placeholder="Username"

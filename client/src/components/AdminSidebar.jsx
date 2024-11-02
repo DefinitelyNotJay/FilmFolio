@@ -15,7 +15,7 @@ export default function AdminSidebar() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-      localStorage.removeItem("token"); // or however you store your token
+      localStorage.removeItem("token");
       dispatch({ type: "LOGOUT" });
       navigate("/login");
   };

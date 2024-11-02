@@ -8,7 +8,7 @@ import Profile from "./pages/admin/Profile";
 import Comments from "./pages/admin/Comments";
 import EditMovie from "./pages/admin/EditMovie";
 import AddMovie from "./pages/admin/AddMovie";
-export const url = "http://localhost:3000/api"
+export const url = "http://54.211.217.223:3000/api"
 
 export default function App() {
   return (

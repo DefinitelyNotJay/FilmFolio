@@ -3,11 +3,12 @@ import express from "express";
 import dotenv from "dotenv";
 import movieRoute from "./routes/movieRoute.js";
 import commentRoute from "./routes/commentRoute.js";
+import ratingRoute from "./routes/ratingRoute.js";
 import serverless from "serverless-http";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 import auth from "./routes/authRoute.js"
-import { Category, Comment, Movie, User } from "./model/Model.js";
+import { Category, Comment, Movie, User, Rating } from "./model/Model.js";
 
 const app = express();
 dotenv.config();
@@ -30,9 +31,8 @@ app.get("/", async (req, res, next) => {
 app.use("/api/auth", auth)
 app.use("/api/movie", movieRoute);
 app.use("/api/comment", commentRoute);
-app.use("/api/movie", movieRoute);
-app.use("/api/comment", commentRoute);
-app.use("/api/rating", commentRoute);
+app.use("/api/rating", ratingRoute);
+
 
 
 // await connectDB()

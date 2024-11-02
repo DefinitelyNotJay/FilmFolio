@@ -6,6 +6,6 @@ const router = express.Router()
 router.get("/rating/:movie_id", getRatingFromMovieId)
 router.get("/user/:user_id", getRatingFromUserId)
 router.post("/create", addRatingMovie)
-router.delete("/remove", removeRatingMovie)
+router.delete("/remove/:rating_id", removeRatingMovie)
 
 export default router

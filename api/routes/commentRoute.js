@@ -7,7 +7,7 @@ router.get("/count/:userId", getCountFromId)
 router.get("/movie/:movie_id", getCommentFromMovieId)
 router.get("/user/:user_id", getCommentFromUserId)
 router.post("/create", addCommentMovie)
-router.delete("/remove", removeCommentMovie)
+router.delete("/remove/:commentId/:userId", removeCommentMovie)
 // router.get("/:id", getCommentsFromId)
 // router.post("/create", createComment)
 

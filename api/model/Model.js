@@ -76,7 +76,6 @@ const ratingSchema = new mongoose.Schema(
       required: true,
     },
     rating: { type: Number, default: 0 },
-    created_at: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );

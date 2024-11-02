@@ -14,6 +14,7 @@ const MovieDetail = () => {
 	const [imageUrl, setImageUrl] = useState('');
 	const [openComment, setOpenComment] = useState(false);
 	const [commentText, setCommentText] = useState('');
+	const [comment, setComment] = useState([])
 
 	const { user } = useContext(AuthContext);
 
@@ -23,6 +24,9 @@ const MovieDetail = () => {
 			setImageUrl(res.data.imageUrl);
 			setOpenComment(false);
 		});
+
+		axios.get(`${url}/comment/movie/${id}`)
+			.then(res=>setComment(res.data))
 	}, [id]);
 	return movieData ? (
 		<div className="text-[#fdfdff] p-12 h-full">
@@ -96,16 +100,18 @@ const MovieDetail = () => {
 							</form>
 						</>
 					)}
-					<div className="p-3 border flex flex-col gap-2 rounded-xl bg-[#333] mt-1">
+					<div className='flex flex-col gap-3'>
+					{comment?.map(com=>(
+						<div key={com._id} className="p-3 border flex flex-col gap-2 rounded-xl bg-[#333] mt-1">
 						<div className="icon flex gap-2 items-center">
 							<CircleUserRound size={32} />
-							<p>ป้อเองนักเลงพอ</p>
+							<p>{com.username}</p>
 						</div>
 						<p className="leading-7">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad molestiae fugiat,
-							accusantium sint culpa velit voluptatem repellendus veritatis blanditiis! Cumque iste
-							dolorem obcaecati quis deserunt esse officiis id qui assumenda.
+						{com.comment.text}
 						</p>
+					</div>
+					))}
 					</div>
 				</div>
 			</section>

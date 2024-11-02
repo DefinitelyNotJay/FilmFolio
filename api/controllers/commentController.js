@@ -12,8 +12,7 @@ export async function browseComments(req, res, next) {
 }
 
 export async function getCommentsFromId(req, res, next) {
-//   const id = new mongoose.Types.ObjectId(req.params.id);
-//   console.log(id);
-//   const commentDoc = await Comment.find({ movieId: { _id: id } });
-//   res.json(commentDoc);
+  const { id } = req.params;
+	const comments = await Comment.findOne({ _id: id });
+	res.status(200).json(comments);
 }

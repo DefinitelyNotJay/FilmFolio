@@ -77,4 +77,9 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+    extend: {
+      fontFamily: {
+        kanit: ['Kanit', 'sans-serif'],
+      },
+    },
+  }

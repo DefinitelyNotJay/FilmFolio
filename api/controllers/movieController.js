@@ -6,9 +6,7 @@ export async function getAllMovies(req, res, next) {
 	let movies = await Movie.find({ image: { $ne: null } }).lean();
 	for (let movie of movies) {
 		if (movie.image) {
-			const url = movie.image.split('/').slice(-1);
-			const key = url[url.length - 1];
-			const imgUrl = await getImageUrl(key);
+			const imgUrl = await getImageUrl(movie.image);
 			movie.imgUrl = imgUrl; // เพิ่ม key-value เข้าไปใน object movie
 		}
 	}
@@ -19,38 +17,41 @@ export async function getAllMovies(req, res, next) {
 }
 
 export async function getMovieInCategory(req, res, next) {
-	const {cate} = req.params;
-	console.log(cate)
+	const { cate } = req.params;
+	console.log(cate);
 	try {
 		// ดึงภาพยนตร์ทั้งหมดตาม cate_id
-        let movies = await Movie.find({ category: cate, image: { $ne: null } }).lean();
-		
+		let movies = await Movie.find({ category: cate, image: { $ne: null } }).lean();
+
 		// แปลง URL รูปภาพ
 		for (let movie of movies) {
 			if (movie.image) {
-				const url = movie.image.split('/').slice(-1);
-				const key = url[url.length - 1];
-				const imgUrl = await getImageUrl(key);
-				movie.imgUrl = imgUrl; 
+				const imgUrl = await getImageUrl(movie.image);
+				movie.imgUrl = imgUrl;
 			}
 		}
 
 		console.log(movies); // แสดงภาพยนตร์ทั้งหมดใน console
 
-		res.status(200).json(movies); 
+		res.status(200).json(movies);
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ message: "เกิดข้อผิดพลาดในการดึงข้อมูลภาพยนตร์" }); // ส่งข้อผิดพลาดไปยัง client
+		res.status(500).json({ message: 'เกิดข้อผิดพลาดในการดึงข้อมูลภาพยนตร์' }); // ส่งข้อผิดพลาดไปยัง client
 	}
 }
-
 
 export async function getMovieFromId(req, res, next) {
 	const { id } = req.params;
 	const movie = await Movie.findOne({ _id: id });
+	if (movie.image) {
+		const imgUrl = await getImageUrl(movie.image);
+		movie.imgUrl = imgUrl;
+		console.log(imgUrl)
+	}
 	res.status(200).json(movie);
 }
 export async function getAllCategories(req, res, next) {
+	wd;
 	console.log('hey');
 	const categories = await Category.find();
 	res.status(200).json(categories);

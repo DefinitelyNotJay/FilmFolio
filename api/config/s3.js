@@ -39,13 +39,14 @@ export async function putObj(originalName, buffer, contentType){
 }
 
 
-export async function getImageUrl(key){
+export async function getImageUrl(imageUrl){
+    const imageList = imageUrl.split('/').slice(-1);
+    const key = imageList[imageList.length - 1];
     const getObjectParams = {
         Bucket: bucketName,
         Key: key
     }
     const command = new GetObjectCommand(getObjectParams)
     const url = await getSignedUrl(s3, command, { expiresIn: 36000 });
-    // console.log(url)
     return url
 }

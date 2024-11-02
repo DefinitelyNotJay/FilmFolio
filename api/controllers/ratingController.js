@@ -3,9 +3,7 @@ import { User } from "../model/Model.js";
 import { Comment } from "../model/Model.js";
 
 
-
-
-export async function addCommentMovie(req, res, next) {
+export async function addRatingMovie(req, res, next) {
 	const { movieId, userId, comment } = req.body;
 
 	if (!movieId || !userId || !comment) {
@@ -38,7 +36,7 @@ export async function addCommentMovie(req, res, next) {
 }
 
 
-export async function removeCommentMovie(req, res, next) {
+export async function removeRatingMovie(req, res, next) {
     try {
         const { commentId, userId } = req.body;
 
@@ -61,7 +59,7 @@ export async function removeCommentMovie(req, res, next) {
     }
 }
 
-export async function getCommentFromMovieId(req, res, next) {
+export async function getRatingFromMovieId(req, res, next) {
 	// try {
 	// 	const {movie_id} = req.params; 
 	// 	const movie = await 
@@ -71,7 +69,7 @@ export async function getCommentFromMovieId(req, res, next) {
 }
 
 
-export async function getCommentFromUserId(req, res, next) {
+export async function getRatingFromUserId(req, res, next) {
     try {
         const { user_id } = req.params; 
         const user = await User.findById(user_id).select('comments');  // Use `user_id` here as well

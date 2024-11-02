@@ -5,6 +5,7 @@ import {
   removeFavoriteMovie,
   createMovie,
   getAllMovies,
+  getMovieInCategory,
   getAllCategories,
   editMovie
 } from "../controllers/movieController.js";
@@ -16,6 +17,7 @@ const upload = multer({ storage: storage})
 const router = express.Router();
 
 router.get("/categories", getAllCategories);
+router.get("/movieincategory/:cate", getMovieInCategory);
 router.get("/:id", getMovieFromId);
 router.get("/", getAllMovies);
 router.post("/create", upload.single("image"), createMovie);

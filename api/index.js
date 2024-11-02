@@ -8,8 +8,6 @@ import serverless from "serverless-http";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 import auth from "./routes/authRoute.js"
-
-import mongoose from "mongoose";
 import { Category, Comment, Movie, User, Rating } from "./model/Model.js";
 
 const app = express();

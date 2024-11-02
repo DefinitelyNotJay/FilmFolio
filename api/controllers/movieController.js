@@ -6,9 +6,7 @@ export async function getAllMovies(req, res, next) {
 	let movies = await Movie.find({ image: { $ne: null } }).lean();
 	for (let movie of movies) {
 		if (movie.image) {
-			const url = movie.image.split('/').slice(-1);
-			const key = url[url.length - 1];
-			const imgUrl = await getImageUrl(key);
+			const imgUrl = await getImageUrl(movie.image);
 			movie.imgUrl = imgUrl; // เพิ่ม key-value เข้าไปใน object movie
 		}
 	}
@@ -26,9 +24,7 @@ export async function getMovieInCategory(req, res, next) {
 		// แปลง URL รูปภาพ
 		for (let movie of movies) {
 			if (movie.image) {
-				const url = movie.image.split('/').slice(-1);
-				const key = url[url.length - 1];
-				const imgUrl = await getImageUrl(key);
+				const imgUrl = await getImageUrl(movie.image);
 				movie.imgUrl = imgUrl;
 			}
 		}

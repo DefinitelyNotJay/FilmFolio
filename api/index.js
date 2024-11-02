@@ -5,7 +5,7 @@ import commentRoute from "./routes/commentRoute.js";
 import serverless from "serverless-http";
 import cors from "cors";
 
-import { Comment, User } from "./model/Model.js";
+import { Category, Comment, Movie, User } from "./model/Model.js";
 
 const app = express();
 dotenv.config();
@@ -30,12 +30,19 @@ async function connectDB() {
 		try {
 			await mongoose.connect(process.env.MONGO_URL);
       console.log("db success")
+      const movies = await Movie.find()
+      console.log(movies)
+      
 		} catch (error) {
 			console.error('Error connecting to MongoDB:', error);
 			throw error;
 		}
 	}
 }
+
+app.listen("3000", async ()=>{
+  await connectDB()
+})
 
 // Export Lambda Handler
 export const handler = async (event, context) => {

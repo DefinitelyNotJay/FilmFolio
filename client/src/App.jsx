@@ -9,6 +9,7 @@ import AddMovie from "./pages/admin/AddMovie";
 import HomeUser from "./pages/user/HomeUser";
 import AdminLayout from "./pages/admin/AdminLayout";
 import UserLayout from "./pages/user/UserLayout";
+import Historyrating from "./pages/user/Historyrating";
 import Register from "./pages/register/register";
 import Login from "./pages/login/login";
 import Admin from "./pages/admin/admin";
@@ -37,6 +38,7 @@ export default function App() {
       <Route element={<UserLayout />}>
         <Route path="/home" element={<HomeUser />} />
         <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/historyrating" element={<Historyrating/>} />
         {/* Add other user routes here */}
       </Route>
     </Routes>

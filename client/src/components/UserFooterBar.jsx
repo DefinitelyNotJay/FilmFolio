@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
+import { MdOutlineHistory } from "react-icons/md";
 
 function UserFooterBar() {
   const { dispatch } = useContext(AuthContext);
@@ -22,12 +23,14 @@ function UserFooterBar() {
     };
   return (
     <div className="fixed bottom-0 w-[390px] h-[75px] bg-[#1A1A1A] flex justify-around items-center py-2 shadow-md rounded-t-3xl">
-      <div className="flex flex-col items-center">
-        <div className="flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white">
-          <GoHome className="text-2xl" />
+      <a href="/home">
+        <div className="flex flex-col items-center">
+          <div className="flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white">
+            <GoHome className="text-2xl" />
+          </div>
+          <span className="text-xs text-white mt-1">Home</span>
         </div>
-        <span className="text-xs text-white mt-1">Home</span>
-      </div>
+        </a>
 
       <div className="flex flex-col items-center text-gray-500 hover:text-white">
         <FcLike className="text-2xl" />

@@ -1,27 +1,94 @@
 import mongoose from "mongoose";
-import { Comment, User } from "../model/Model.js";
+import { User, Rating } from "../model/Model.js";
+import { Comment } from "../model/Model.js";
 
-export async function createComment(req, res, next) {
-  const commentDoc = await Comment.collection.insertOne(req.body);
-  res.status(200).json(commentDoc);
+
+
+export async function addCommentMovie(req, res, next) {
+	const { movieId, userId, comment } = req.body;
+
+	if (!movieId || !userId || !comment) {
+		return res.status(400).json({ message: 'movieId, userId, and comment are required' });
+	}
+
+	try {
+		const updatedUser = await User.findOneAndUpdate(
+			{ _id: userId },
+			{
+				$push: {
+					comments: {
+						text: comment,
+						movie: movieId
+					}
+				}
+			},
+			{ new: true }
+		);
+
+		if (!updatedUser) {
+			return res.status(404).json({ message: 'User not found' });
+		}
+
+		res.status(200).json(updatedUser);
+	} catch (error) {
+		console.error('Error adding comment:', error);
+		return res.status(500).json({ message: 'Failed to add comment' });
+	}
 }
 
-export async function browseComments(req, res, next) {
-  const comments = await Comment.find({});
-  res.json(comments);
+
+export async function removeCommentMovie(req, res, next) {
+	try {
+		const { commentId, userId } = req.body;
+
+		if (!commentId || !userId) {
+			return res.status(400).json({ message: 'Missing required fields' });
+		}
+
+		const user = await User.findOneAndUpdate(
+			{ _id: userId },
+			{ $pull: { comments: { _id: commentId } } },
+		);
+
+		if (!user) {
+			return res.status(404).json({ message: 'User or comment not found' });
+		}
+
+		res.status(200).json({ message: 'Comment removed successfully', user });
+	} catch (error) {
+		next(error);
+	}
 }
 
-export async function getCommentsFromId(req, res, next) {
-  const { id } = req.params;
-	const comments = await Comment.findOne({ _id: id });
-	res.status(200).json(comments);
+export async function getCommentFromMovieId(req, res, next) {
+	// try {
+	// 	const {movie_id} = req.params; 
+	// 	const movie = await 
+	// } catch (error) {
+
+	// }
 }
 
-export async function gatCountCommentsFromId(req, res, next) {
-  const { userId } = req.params;
-  console.log(userId)
-  const user = await User.findOne({ _id: userId });
-	// const count = user.comments.length;
-  // console.log(count)
-	res.status(200).json(user);
+export async function getCountFromId(req, res, next) {
+	const { userId } = req.params;
+	const user = await User.findOne({ _id: userId });
+	const rating = await Rating.countDocuments({ userId });
+	const comment = user.comments.length;
+	res.status(200).json({ rating,comment });
 }
+
+export async function getCommentFromUserId(req, res, next) {
+	try {
+		const { user_id } = req.params;
+		const user = await User.findById(user_id).select('comments');  // Use `user_id` here as well
+
+		if (!user) {
+			return res.status(404).json({ message: 'User not found' });
+		}
+
+		res.json(user.comments);
+	} catch (error) {
+		next(error);
+	}
+}
+

@@ -1,12 +1,15 @@
 import express from "express"
-import { browseComments, createComment, getCommentsFromId,gatCountCommentsFromId } from "../controllers/commentController.js"
+import { getCommentFromMovieId, removeCommentMovie, addCommentMovie, getCommentFromUserId, getCountFromId } from "../controllers/commentController.js"
 
 const router = express.Router()
 
-router.get("/", browseComments)
-router.get("/count/:userId", gatCountCommentsFromId)
-router.get("/:id", getCommentsFromId)
-router.post("/create", createComment)
+router.get("/count/:userId", getCountFromId)
+router.get("/movie/:movie_id", getCommentFromMovieId)
+router.get("/user/:user_id", getCommentFromUserId)
+router.post("/create", addCommentMovie)
+router.delete("/remove", removeCommentMovie)
+// router.get("/:id", getCommentsFromId)
+// router.post("/create", createComment)
 
 
 export default router

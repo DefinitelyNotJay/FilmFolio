@@ -9,7 +9,7 @@ import AddMovie from "./pages/admin/AddMovie";
 import HomeUser from "./pages/user/HomeUser";
 import AdminLayout from "./pages/admin/AdminLayout";
 import UserLayout from "./pages/user/UserLayout";
-import Historyrating from "./pages/user/Historyrating";
+import HistoryRating from "./pages/user/HistoryRating";
 import Register from "./pages/register/register";
 import Login from "./pages/login/login";
 import Admin from "./pages/admin/admin";
@@ -41,7 +41,7 @@ export default function App() {
         <Route path="/movie/detail/:id" element={<MovieDetail />}/>
         <Route path="/home" element={<HomeUser />} />
         <Route path="/userprofile" element={<UserProfile />} />
-        <Route path="/historyrating" element={<Historyrating/>} />
+        <Route path="/historyrating" element={<HistoryRating/>} />
         {/* Add other user routes here */}
       </Route>
     </Routes>

@@ -14,6 +14,7 @@ import Register from "./pages/register/register";
 import Login from "./pages/login/login";
 import Admin from "./pages/admin/admin";
 import HomeUserTest from "./pages/home/home";
+import MovieDetail from "./pages/user/MovieDetail";
 
 export const url = "http://localhost:3000/api";
 
@@ -22,7 +23,7 @@ export default function App() {
     <Routes>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/home" element={<HomeUserTest />} />
+      <Route path="/home1" element={<HomeUserTest />} />
       <Route path="/admin" element={<Admin />} />
       {/* Admin Routes */}
       <Route element={<AdminLayout />}>
@@ -37,6 +38,8 @@ export default function App() {
 
       {/* User Routes */}
       <Route element={<UserLayout />}>
+        <Route path="/home" element={<HomeUser />}/>
+        <Route path="/movie/detail/:id" element={<MovieDetail />}/>
         <Route path="/home" element={<HomeUser />} />
         <Route path="/historyrating" element={<Historyrating/>} />
         {/* Add other user routes here */}

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
 import movieRoute from "./routes/movieRoute.js";
@@ -6,15 +7,15 @@ import serverless from "serverless-http";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 import auth from "./routes/authRoute.js"
-
-import mongoose from "mongoose";
 import { Category, Comment, Movie, User } from "./model/Model.js";
 
 const app = express();
 dotenv.config();
-
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+	origin: "http://localhost:5173",
+	credentials: true
+}));
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }))
@@ -40,8 +41,6 @@ async function connectDB() {
 		try {
 			await mongoose.connect(process.env.MONGO_URL);
       console.log("db success")
-      const movies = await Movie.find()
-      console.log(movies)
       
 		} catch (error) {
 			console.error('Error connecting to MongoDB:', error);
@@ -52,6 +51,7 @@ async function connectDB() {
 
 app.listen("3000", async ()=>{
   await connectDB()
+  console.log("server running in port 3000")
 })
 
 // Export Lambda Handler

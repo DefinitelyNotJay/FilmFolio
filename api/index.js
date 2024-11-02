@@ -4,7 +4,10 @@ import movieRoute from "./routes/movieRoute.js";
 import commentRoute from "./routes/commentRoute.js";
 import serverless from "serverless-http";
 import cors from "cors";
+import cookieParser from 'cookie-parser';
+import auth from "./routes/authRoute.js"
 
+import mongoose from "mongoose";
 import { Category, Comment, Movie, User } from "./model/Model.js";
 
 const app = express();
@@ -13,6 +16,9 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }))
+
 
 
 app.get("/", async (req, res, next) => {
@@ -20,6 +26,9 @@ app.get("/", async (req, res, next) => {
   res.status(200).json(comments);
 });
 
+app.use("/api/auth", auth)
+app.use("/api/movie", movieRoute);
+app.use("/api/comment", commentRoute);
 app.use("/api/movie", movieRoute);
 app.use("/api/comment", commentRoute);
 

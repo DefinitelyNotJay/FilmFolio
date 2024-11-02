@@ -1,4 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 import {
   House,
   Clapperboard,
@@ -8,6 +11,14 @@ import {
   LogOut,
 } from "lucide-react";
 export default function AdminSidebar() {
+  const { dispatch } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+      localStorage.removeItem("token"); // or however you store your token
+      dispatch({ type: "LOGOUT" });
+      navigate("/login");
+  };
   return (
     <div className="h-screen w-[20%] sticky top-0 border-r border-r-[#343A40] flex flex-col justify-between py-8 px-12">
       <div className="text-[36px] text-center text-white font-semibold cursor-pointer">
@@ -21,7 +32,7 @@ export default function AdminSidebar() {
         <AdminNavLink link="/profile" Icon={UserPen} title="Profile" />
       </nav>
       <div></div>
-      <button className="text-white flex gap-2 px-3 py-4 rounded-md">
+      <button onClick={handleLogout} className="text-white flex gap-2 px-3 py-4 rounded-md">
         <LogOut />
         Logout
       </button>

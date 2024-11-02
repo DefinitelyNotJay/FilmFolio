@@ -9,6 +9,7 @@ import AddMovie from "./pages/admin/AddMovie";
 import HomeUser from "./pages/user/HomeUser";
 import AdminLayout from "./pages/admin/AdminLayout";
 import UserLayout from "./pages/user/UserLayout";
+import MovieDetail from "./pages/user/MovieDetail";
 
 export const url = "http://localhost:3000/api";
 
@@ -28,7 +29,8 @@ export default function App() {
 
       {/* User Routes */}
       <Route element={<UserLayout />}>
-        <Route path="/home" element={<HomeUser />} />
+        <Route path="/home" element={<HomeUser />}/>
+        <Route path="/movie/detail/:id" element={<MovieDetail />}/>
         {/* Add other user routes here */}
       </Route>
     </Routes>

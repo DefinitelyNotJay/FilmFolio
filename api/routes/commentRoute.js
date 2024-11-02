@@ -6,6 +6,6 @@ const router = express.Router()
 router.get("/movie/:movie_id", getCommentFromMovieId)
 router.get("/user/:user_id", getCommentFromUserId)
 router.post("/create", addCommentMovie)
-router.delete("/remove", removeCommentMovie)
+router.delete("/remove/:commentId/:userId", removeCommentMovie)
 
 export default router

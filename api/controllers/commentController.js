@@ -40,7 +40,7 @@ export async function addCommentMovie(req, res, next) {
 
 export async function removeCommentMovie(req, res, next) {
     try {
-        const { commentId, userId } = req.body;
+        const { commentId, userId } = req.params;
 
         if (!commentId || !userId) {
             return res.status(400).json({ message: 'Missing required fields' });

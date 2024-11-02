@@ -22,7 +22,7 @@ export default function App() {
     <Routes>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/home" element={<HomeUserTest />} />
+      <Route path="/home1" element={<HomeUserTest />} />
       <Route path="/admin" element={<Admin />} />
       {/* Admin Routes */}
       <Route element={<AdminLayout />}>

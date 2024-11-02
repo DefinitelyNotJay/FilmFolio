@@ -21,7 +21,7 @@ const movieSchema = new mongoose.Schema(
     synopsis: { type: String },
     year: { type: Number },
     rating: { type: Number, default: 0 },
-    category: { type: String },
+    category: { type: [String] },
     views: { type: Number, default: 0 },
     image: { type: String, required: true },
   },
@@ -70,44 +70,18 @@ const statsSchema = new mongoose.Schema(
 
 const Stats = mongoose.model("Stats", statsSchema);
 
-// ฟังก์ชันสำหรับผู้ดูแลระบบ
+const categorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: [String],
+      unique: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-// การจัดการผู้ใช้งาน
-export const listUsers = async () => {
-  return await User.find();
-};
+const Category = mongoose.model("Category", categorySchema);
 
-export const deleteUser = async (userId) => {
-  return await User.findByIdAndDelete(userId);
-};
-
-// การจัดการภาพยนตร์
-export const addMovie = async (movieData) => {
-  const movie = new Movie(movieData);
-  return await movie.save();
-};
-
-export const updateMovie = async (movieId, movieData) => {
-  return await Movie.findByIdAndUpdate(movieId, movieData, { new: true });
-};
-
-export const deleteMovie = async (movieId) => {
-  return await Movie.findByIdAndDelete(movieId);
-};
-
-// การจัดการคอมเม้นท์
-export const listComments = async (movieId) => {
-  return await Comment.find({ movieId });
-};
-
-export const deleteComment = async (commentId) => {
-  return await Comment.findByIdAndDelete(commentId);
-};
-
-// การดูสถิติ
-export const getMovieStats = async (movieId) => {
-  return await Stats.findOne({ movieId });
-};
-
-// Export โมเดลทั้งหมด
-export { User, Movie, Comment, Stats };
+export { Category, Comment, Movie, Stats, User };

@@ -1,27 +1,44 @@
-import React from "react";
-import Register from "../src/pages/register/register";
 import { Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import Home from "./pages/home/home";
-import Login from "../src/pages/login/login";
+import Home from "./pages/admin/Home";
+import Users from "./pages/admin/Users";
+import Movie from "./pages/admin/Movie";
+import Profile from "./pages/admin/Profile";
+import Comments from "./pages/admin/Comments";
+import EditMovie from "./pages/admin/EditMovie";
+import AddMovie from "./pages/admin/AddMovie";
+import HomeUser from "./pages/user/HomeUser";
+import AdminLayout from "./pages/admin/AdminLayout";
+import UserLayout from "./pages/user/UserLayout";
+import Register from "./pages/register/register";
+import Login from "./pages/login/login";
 import Admin from "./pages/admin/admin";
-export const api = "http://localhost:3000";
+
+
+export const url = "http://localhost:3000/api";
+
 export default function App() {
   return (
-    <>
-      <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
-      <div className="h-[2000px] w-screen bg-[#fafafa] flex font-kanit">
-        <div className="w-full">
-          <div>
-            <Routes>
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/admin" element={<Admin />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
-    </>
+    <Routes>
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      {/* <Route path="/home" element={<Home />} /> */}
+      <Route path="/admin" element={<Admin />} />
+      {/* Admin Routes */}
+      <Route element={<AdminLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/movies" element={<Movie />} />
+        <Route path="/comments" element={<Comments />} />
+        <Route path="/movie/:id" element={<EditMovie />} />
+        <Route path="/movie/new" element={<AddMovie />} />
+      </Route>
+
+      {/* User Routes */}
+      <Route element={<UserLayout />}>
+        <Route path="/home" element={<HomeUser />} />
+        {/* Add other user routes here */}
+      </Route>
+    </Routes>
   );
 }

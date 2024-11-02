@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-import { User } from "../model/Model.js";
+import { User, Rating } from "../model/Model.js";
 import { Comment } from "../model/Model.js";
-
 
 
 
@@ -42,23 +41,23 @@ export async function removeCommentMovie(req, res, next) {
     try {
         const { commentId, userId } = req.params;
 
-        if (!commentId || !userId) {
-            return res.status(400).json({ message: 'Missing required fields' });
-        }
+		if (!commentId || !userId) {
+			return res.status(400).json({ message: 'Missing required fields' });
+		}
 
-        const user = await User.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { comments: { _id: commentId } } },
-        );
+		const user = await User.findOneAndUpdate(
+			{ _id: userId },
+			{ $pull: { comments: { _id: commentId } } },
+		);
 
-        if (!user) {
-            return res.status(404).json({ message: 'User or comment not found' });
-        }
+		if (!user) {
+			return res.status(404).json({ message: 'User or comment not found' });
+		}
 
-        res.status(200).json({ message: 'Comment removed successfully', user });
-    } catch (error) {
-        next(error);
-    }
+		res.status(200).json({ message: 'Comment removed successfully', user });
+	} catch (error) {
+		next(error);
+	}
 }
 
 export async function getCommentFromMovieId(req, res, next) {
@@ -66,23 +65,30 @@ export async function getCommentFromMovieId(req, res, next) {
 	// 	const {movie_id} = req.params; 
 	// 	const movie = await 
 	// } catch (error) {
-		
+
 	// }
 }
 
+export async function getCountFromId(req, res, next) {
+	const { userId } = req.params;
+	const user = await User.findOne({ _id: userId });
+	const rating = await Rating.countDocuments({ userId });
+	const comment = user.comments.length;
+	res.status(200).json({ rating,comment });
+}
 
 export async function getCommentFromUserId(req, res, next) {
-    try {
-        const { user_id } = req.params; 
-        const user = await User.findById(user_id).select('comments');  // Use `user_id` here as well
-        
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+	try {
+		const { user_id } = req.params;
+		const user = await User.findById(user_id).select('comments');  // Use `user_id` here as well
 
-        res.json(user.comments);
-    } catch (error) {
-        next(error);
-    }
+		if (!user) {
+			return res.status(404).json({ message: 'User not found' });
+		}
+
+		res.json(user.comments);
+	} catch (error) {
+		next(error);
+	}
 }
 

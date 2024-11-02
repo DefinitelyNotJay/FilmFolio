@@ -6,12 +6,12 @@ export async function getAllMovies(req, res, next) {
 	let movies = await Movie.find({ image: { $ne: null } }).lean();
 	for (let movie of movies) {
 		if (movie.image) {
-			const imgUrl = await getImageUrl(movie.image);
+			const url = movie.image.split('/').slice(-1);
+			const key = url[url.length - 1];
+			const imgUrl = await getImageUrl(key);
 			movie.imgUrl = imgUrl; // เพิ่ม key-value เข้าไปใน object movie
 		}
 	}
-
-	console.log(movies[0]);
 
 	res.status(200).json(movies);
 }
@@ -26,7 +26,9 @@ export async function getMovieInCategory(req, res, next) {
 		// แปลง URL รูปภาพ
 		for (let movie of movies) {
 			if (movie.image) {
-				const imgUrl = await getImageUrl(movie.image);
+				const url = movie.image.split('/').slice(-1);
+				const key = url[url.length - 1];
+				const imgUrl = await getImageUrl(key);
 				movie.imgUrl = imgUrl;
 			}
 		}
@@ -43,16 +45,10 @@ export async function getMovieInCategory(req, res, next) {
 export async function getMovieFromId(req, res, next) {
 	const { id } = req.params;
 	const movie = await Movie.findOne({ _id: id });
-	if (movie.image) {
-		const imgUrl = await getImageUrl(movie.image);
-		movie.imgUrl = imgUrl;
-		console.log(imgUrl)
-	}
-	res.status(200).json(movie);
+	const imageUrl = await getImageUrl(movie.image);
+	res.status(200).json({ movie: movie, imageUrl, imageUrl });
 }
 export async function getAllCategories(req, res, next) {
-	wd;
-	console.log('hey');
 	const categories = await Category.find();
 	res.status(200).json(categories);
 }

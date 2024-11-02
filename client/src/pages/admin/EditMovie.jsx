@@ -3,17 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-
+import { Input } from "@/components/ui/input";
 import { url } from "@/App";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -24,6 +14,7 @@ export default function EditMovie() {
   const { id } = useParams();
   const [selectCategories, setSelectCategories] = useState([]);
   const [category, setCategory] = useState([]);
+  const [image, setImage] = useState()
 
   useEffect(() => {
     axios
@@ -55,7 +46,7 @@ export default function EditMovie() {
 
        />
       <h1 className="font-bold text-2xl text-[#e7e7e7]">Movies details</h1>
-      <div className="w-full mt-4">
+      <div className="w-full mt-4 flex">
         <form
           onSubmit={handleSubmit(submitHandler)}
           className="w-1/2 flex flex-col gap-6 text-[#e7e7e7]"
@@ -97,7 +88,7 @@ export default function EditMovie() {
                 });
               }}
             >
-              <option selected disabled>Choose one or more</option>
+              <option disabled>Choose one or more</option>
               {selectCategories.map((cate) => (
                 <option key={cate._id} value={cate.name}>
                   {cate.name}
@@ -133,7 +124,9 @@ export default function EditMovie() {
           </Button>
           </div>
         </form>
-        <div className="w-1/2"></div>
+        <div className="w-1/2">
+        <img src="" alt="" />
+        </div>
       </div>
     </div>
   );

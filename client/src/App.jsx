@@ -9,6 +9,10 @@ import AddMovie from "./pages/admin/AddMovie";
 import HomeUser from "./pages/user/HomeUser";
 import AdminLayout from "./pages/admin/AdminLayout";
 import UserLayout from "./pages/user/UserLayout";
+import Register from "./pages/register/register";
+import Login from "./pages/login/login";
+import Admin from "./pages/admin/admin";
+import HomeUserTest from "./pages/home/home";
 import MovieDetail from "./pages/user/MovieDetail";
 
 export const url = "http://localhost:3000/api";
@@ -16,6 +20,10 @@ export const url = "http://localhost:3000/api";
 export default function App() {
   return (
     <Routes>
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/home" element={<HomeUserTest />} />
+      <Route path="/admin" element={<Admin />} />
       {/* Admin Routes */}
       <Route element={<AdminLayout />}>
         <Route path="/" element={<Home />} />

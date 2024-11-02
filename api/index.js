@@ -14,7 +14,7 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 app.use(cors({
-	origin: "http://3.90.166.170",
+	origin: "http://34.227.81.55",
 	credentials: true
 }));
 

@@ -1,6 +1,6 @@
 import { Eye, Star, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-export default function MovieList({title="unknown", imgSrc}) {
+export default function MovieList({title="unknown", imgSrc, id}) {
   const navigate = useNavigate();
   return (
     <div

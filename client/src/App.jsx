@@ -13,8 +13,9 @@ import Historyrating from "./pages/user/Historyrating";
 import Register from "./pages/register/register";
 import Login from "./pages/login/login";
 import Admin from "./pages/admin/admin";
-import HomeUserTest from "./pages/home/home";
 import UserProfile from "./pages/user/UserProfile";
+import MovieDetail from "./pages/user/MovieDetail";
+
 export const url = "http://localhost:3000/api";
 
 export default function App() {
@@ -36,6 +37,8 @@ export default function App() {
 
       {/* User Routes */}
       <Route element={<UserLayout />}>
+        <Route path="/home" element={<HomeUser />}/>
+        <Route path="/movie/detail/:id" element={<MovieDetail />}/>
         <Route path="/home" element={<HomeUser />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/historyrating" element={<Historyrating/>} />

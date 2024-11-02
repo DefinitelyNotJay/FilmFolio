@@ -3,9 +3,24 @@ import { GoHome } from "react-icons/go";
 import { FcLike } from "react-icons/fc";
 import { LuUser2 } from "react-icons/lu";
 import { IoMdLogOut } from "react-icons/io";
+import { useContext } from "react";
+import { AuthContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
+
 import { MdOutlineHistory } from "react-icons/md";
 
 function UserFooterBar() {
+  const { dispatch } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      dispatch({ type: "LOGOUT" });
+      navigate("/login");
+    };
+    const handleProfile = () => {
+      navigate("/userprofile");
+    };
   return (
     <div className="fixed bottom-0 w-[390px] h-[75px] bg-[#1A1A1A] flex justify-around items-center py-2 shadow-md rounded-t-3xl">
       <a href="/home">
@@ -21,21 +36,13 @@ function UserFooterBar() {
         <FcLike className="text-2xl" />
       </div>
 
-      <a href="/historyrating">
-        <div className="flex flex-col items-center text-gray-500 hover:text-white">
-          <MdOutlineHistory className="text-2xl" />
-        </div>
-      </a>
+      <button onClick={handleProfile} className="flex flex-col items-center text-gray-500 hover:text-white">
+        <LuUser2 className="text-2xl" />
+      </button>
 
-      <a href=".#">
-        <div className="flex flex-col items-center text-gray-500 hover:text-white">
-          <LuUser2 className="text-2xl" />
-        </div>
-      </a>
-
-      <div className="flex flex-col items-center text-gray-500 hover:text-white">
+      <button onClick={handleLogout} className="flex flex-col items-center text-gray-500 hover:text-white">
         <IoMdLogOut className="text-2xl" />
-      </div>
+      </button>
 
     </div>
   );

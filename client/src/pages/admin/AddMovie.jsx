@@ -10,12 +10,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddMovie() {
 	const { id } = useParams();
 	const [selectCategories, setSelectCategories] = useState([]);
 	const [category, setCategory] = useState([]);
 	const [image, setImage] = useState(undefined);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		axios.get(`${url}/movie/categories`).then((res) => setSelectCategories(res.data));
@@ -29,10 +31,20 @@ export default function AddMovie() {
 			.post(`${url}/movie/create`, createData, {
 				withCredentials: true,
 				headers: {
-					'Content-Type': 'multipart/form-data', // ระบุ Content-Type
+					'Content-Type': 'multipart/form-data',
 				},
 			})
-			.then((res) => toast.success('Success!'));
+			.then((res) => {
+				toast.success('Success!', {
+					position: 'top-right',
+					autoClose: 2000,
+					closeOnClick: true,
+					theme: 'dark',
+					onClose: () => {
+						navigate('/movies');
+					},
+				});
+			});
 	};
 
 	return (
@@ -81,7 +93,7 @@ export default function AddMovie() {
 									});
 								}}
 							>
-								<option selected disabled>
+								<option disabled>
 									Choose one or more
 								</option>
 								{selectCategories.map((cate) => (
@@ -132,8 +144,8 @@ export default function AddMovie() {
 					<div className=""></div>
 				</div>
 			</div>
-			<div className='w-full flex justify-center items-center'>
-				<img src={image} className='h-[300px]' alt="" />
+			<div className="w-full flex justify-center items-center">
+				<img src={image} className="h-[300px]" alt="" />
 			</div>
 		</div>
 	);

@@ -33,7 +33,7 @@ const AuthReducer = (state, action) => {
             return {
                 user: null,
                 loading: false,
-                error: action.playload,
+                error: action.payload,
             };
         case "LOGOUT":
             return {

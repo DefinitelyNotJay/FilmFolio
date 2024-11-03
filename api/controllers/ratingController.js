@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { User } from '../model/Model.js';
+import { Movie, User } from '../model/Model.js';
 import { Rating } from '../model/Model.js';
 
 export async function addRatingMovie(req, res, next) {
@@ -19,6 +19,7 @@ export async function addRatingMovie(req, res, next) {
 				rating,
 			});
 			console.log('create complete');
+			updateMovieRating(movieId);
 			return res.status(201).json(newRating);
 		}
 
@@ -27,6 +28,7 @@ export async function addRatingMovie(req, res, next) {
 			{ movieId, userId, rating }
 		);
 		console.log('update complete');
+		updateMovieRating(movieId);
 		return res.status(200).json(updateRated);
 	} catch (error) {
 		return res.status(500).json({ message: 'Error creating rating', error });
@@ -39,7 +41,11 @@ export async function removeRatingMovie(req, res, next) {
 		if (!rating_id) {
 			return res.status(400).json({ message: 'Rating ID is required' });
 		}
+		const deleteRating = await Rating.findById(rating_id);
+		const movieId = deleteRating.movieId;
 		const result = await Rating.deleteOne({ _id: rating_id });
+		console.log('movieId', movieId.toString());
+		updateMovieRating(movieId.toString());
 		res.status(200).json({ message: 'Rating deleted successfully' });
 	} catch (error) {
 		next(error);
@@ -47,11 +53,9 @@ export async function removeRatingMovie(req, res, next) {
 }
 
 export async function getRatingFromMovieId(req, res, next) {
-	// try {
-	// 	const {movie_id} = req.params;
-	// 	const movie = await
-	// } catch (error) {
-	// }
+	const { movieId } = req.params;
+	const movieFromId = await Movie.findById({ id: movieId }, { rating: 1 });
+	return res.status(200).json(movieFromId);
 }
 
 export async function getRatingFromUserId(req, res, next) {
@@ -76,4 +80,25 @@ export async function getRatingFromMovieAndUserId(req, res, next) {
 	} catch (error) {
 		next(error);
 	}
+}
+
+async function updateMovieRating(movieId) {
+	let rating = 0;
+	try {
+		const allRatingThisMovie = await Rating.find({ movieId: movieId }, { rating: 1 });
+		let total = 0;
+		const amount = allRatingThisMovie.length;
+
+		if (amount > 0) {
+			allRatingThisMovie.forEach((rating) => (total += rating.rating || 0));
+			rating = total / amount;
+		} else {
+			rating = 0; // ถ้าไม่มีการรีวิว ให้ rating เป็น 0
+		}
+	} catch (err) {
+		console.error(err);
+		rating = 0;
+	}
+
+	await Movie.findByIdAndUpdate({ _id: movieId }, { rating: rating });
 }

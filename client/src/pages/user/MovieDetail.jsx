@@ -47,7 +47,10 @@ const MovieDetail = () => {
 				<div className="text-center flex flex-col gap-1 mt-2">
 					<h1 className="text-2xl font-semibold">{movieData.title}</h1>
 					<p className="text-sm">{movieData.year}</p>
-					<p className="text-sm">★ ★ ★ ★ ☆</p>
+					<div className="flex gap-1 mx-auto">
+						<StarRating rating={movieData.rating || 0} />
+						<span>({Math.round(movieData.rating * 10) / 10})</span>
+					</div>
 				</div>
 			</section>
 			<section className="mt-4 flex flex-col gap-3">
@@ -56,7 +59,7 @@ const MovieDetail = () => {
 					<p className="text-sm">{movieData.synopsis}</p>
 				</div>
 				{previousStar && (
-					<div className='flex gap-2'>
+					<div className="flex gap-2">
 						<h1 className="font-semibold">• Your Score</h1>
 						<StarRating rating={previousStar} />
 					</div>

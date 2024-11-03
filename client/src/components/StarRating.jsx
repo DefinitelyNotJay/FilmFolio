@@ -2,7 +2,7 @@ function StarRating({ rating, size = 14 }) {
 	const renderStars = () => {
 		return Array.from({ length: 5 }, (_, index) => (
 			<span key={index} className={`text-[${size}px]`}>
-				{index < rating ? '★' : '☆'}
+				{index < parseInt(rating) ? '★' : '☆'}
 			</span>
 		));
 	};

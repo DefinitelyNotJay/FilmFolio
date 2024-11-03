@@ -43,7 +43,6 @@ const UserRating = ({ rating }) => {
 								Date: {new Date(rating.createdAt).toLocaleDateString()}
 							</p>
 						</div>
-
 						<button
 							className="text-[10px] text-red-400"
 							onClick={() => handleRemoveRating(rating._id)}

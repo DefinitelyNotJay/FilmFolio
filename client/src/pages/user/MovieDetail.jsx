@@ -18,6 +18,7 @@ const MovieDetail = () => {
 	const [comment, setComment] = useState([]);
 	const [openStar, setOpenStar] = useState(false);
 	const [star, setStar] = useState(0);
+	const [previousStar, setPreviousStar] = useState();
 
 	const { user } = useContext(AuthContext);
 
@@ -26,6 +27,13 @@ const MovieDetail = () => {
 			setMovieData(res.data.movie);
 			setImageUrl(res.data.imageUrl);
 			setOpenComment(false);
+		});
+
+		axios.get(`${url}/rating/?userId=${user._id}&movieId=${id}`).then((res) => {
+			console.log(res.data);
+			if (res.data?.rating) {
+				setPreviousStar(res.data.rating);
+			}
 		});
 
 		axios.get(`${url}/comment/movie/${id}`).then((res) => setComment(res.data));
@@ -39,9 +47,16 @@ const MovieDetail = () => {
 					<h1 className="text-2xl font-semibold">{movieData.title}</h1>
 					<p className="text-sm">{movieData.year}</p>
 					<p className="text-sm">★ ★ ★ ★ ☆</p>
+					<p>{previousStar}</p>
 				</div>
 			</section>
 			<section className="mt-4 flex flex-col gap-3">
+				{previousStar && (
+					<div>
+						<h1 className="font-semibold">• Your Score</h1>
+						<p className="text-sm">{movieData.synopsis}</p>
+					</div>
+				)}
 				<div>
 					<h1 className="font-semibold">• Movie Subject</h1>
 					<p className="text-sm">{movieData.synopsis}</p>
@@ -107,7 +122,6 @@ const MovieDetail = () => {
 								<select
 									onChange={(e) => {
 										setStar(e.target.value);
-										console.log(star);
 									}}
 									value={star}
 									name="star"

@@ -1,16 +1,13 @@
-function StarRating({ rating }) {
-  const renderStars = () => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <span 
-        key={index} 
-        className="text-sm"
-      >
-        {index < rating ? '★' : '☆'}
-      </span>
-    ));
-  };
+function StarRating({ rating, size = 14 }) {
+	const renderStars = () => {
+		return Array.from({ length: 5 }, (_, index) => (
+			<span key={index} className={`text-[${size}px]`}>
+				{index < rating ? '★' : '☆'}
+			</span>
+		));
+	};
 
-  return <div>{renderStars()}</div>;
+	return <div>{renderStars()}</div>;
 }
 
 export default StarRating;

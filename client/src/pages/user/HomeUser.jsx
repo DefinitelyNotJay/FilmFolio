@@ -94,7 +94,7 @@ function HomeUser() {
       <div className="flex gap-2 py-5 px-2 bg-opacity-90 bg-[#242020] m-4 rounded-lg shadow-lg">
         <div className="p-1 w-5/12">
           <img
-            src={`${latestMovie.imgUrl}`}
+            src={`${latestMovie?.imgUrl}`}
             alt="Stranger Things Poster"
             className="w-full h-full rounded-lg object-cover shadow-lg"
           />
@@ -105,15 +105,15 @@ function HomeUser() {
           </div>
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="text-sm font-bold text-white">{latestMovie.title }</h2>
-              <p className="text-gray-400 text-sm">{latestMovie.year}</p>
+              <h2 className="text-sm font-bold text-white">{latestMovie?.title }</h2>
+              <p className="text-gray-400 text-sm">{latestMovie?.year}</p>
             </div>
           </div>
           <p className="mt-2 text-gray-300 text-[10px]">
-            {latestMovie.synopsis }
+            {latestMovie?.synopsis }
           </p>
           <div className="flex justify-end">
-            <button onClick={()=>{navigate(`/movie/detail/${latestMovie._id}`)}} className="mt-4 px-3 py-1 bg-yellow-500 rounded-full text-black font-semibold text-[10px]">
+            <button onClick={()=>{navigate(`/movie/detail/${latestMovie?._id}`)}} className="mt-4 px-3 py-1 bg-yellow-500 rounded-full text-black font-semibold text-[10px]">
               REVIEW
             </button>
           </div>

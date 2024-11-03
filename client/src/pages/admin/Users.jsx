@@ -1,5 +1,4 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
+import {useEffect} from "react";
 import {
   Table,
   TableBody,
@@ -10,117 +9,43 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  LetterText,
   WholeWord,
   Calendar,
   Mail,
-  FilePenLine,
+  ContactRound
 } from "lucide-react";
+import axios from "axios";
+import { url } from "@/App";
+import { useState } from "react";
 export default function Users() {
-  const data = [
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-    {
-      name: "Jon Snow",
-      username: "snow1231",
-      joined_date: "2024-03-02",
-      email: "jonsnow@gmail.com",
-    },
-  ];
+  const [users, setUsers] = useState([])
+  useEffect(()=>{
+    axios.get(`${url}/auth/users`)
+      .then((res)=>{
+        const usersData = res.data
+        const data = usersData.map(user=>{
+          const dateStr = user.createdAt;
+          const date = new Date(dateStr);
+         
+
+          const months = [
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
+          ];
+const formattedDate = `${String(date.getDate()).padStart(2, '0')} ${months[date.getMonth()]} ${date.getFullYear()}`;
+
+          return {...user, createdAt: formattedDate}
+        })
+        
+        setUsers(data)
+      })
+  }, [])
   return (
     <div className="px-2 py-4">
       <Table className="text-[#CFDBD5] w-10/12 mx-auto mt-12 bg-[#212121]">
         <TableCaption>A list of user accounts.</TableCaption>
         <TableHeader>
           <TableRow className="border-none">
-            <TableHead className="border border-[#343a40] border-opacity-40 text-[#868e96]">
-              <div className="flex gap-2 items-center">
-                <LetterText />
-                Name
-              </div>
-            </TableHead>
             <TableHead className="border border-[#343a40] border-opacity-40 text-[#868e96]">
               <div className="flex gap-2 items-center">
                 <WholeWord />
@@ -141,35 +66,30 @@ export default function Users() {
             </TableHead>
             <TableHead className="border border-[#343a40] border-opacity-40 text-[#868e96]">
               <div className="flex gap-2 items-center">
-                <FilePenLine />
-                Actions
+              <ContactRound />
+                Role
               </div>
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {/* loop here */}
-          {data &&
-            data.map((item, index) => (
+          {users &&
+            users.map((user, index) => (
               <TableRow key={index} className="border-none">
                 <TableCell className="border border-[#343a40] border-opacity-40">
-                  {item.name}
+                  {user.username}
                 </TableCell>
                 <TableCell className="border border-[#343a40] border-opacity-40">
-                  {item.username}
+                  {user.createdAt}
                 </TableCell>
                 <TableCell className="border border-[#343a40] border-opacity-40">
-                  {item.joined_date}
+                  {user.email}
                 </TableCell>
                 <TableCell className="border border-[#343a40] border-opacity-40">
-                  {item.email}
+                  {user.isAdmin ? "Administrator" : "User"}
                 </TableCell>
-                <TableCell className="border border-[#343a40] border-opacity-40 flex justify-center gap-4 px-0">
-                  <Button className="bg-[#50504f] text-[#E8EDDF]">Edit</Button>
-                  <Button className="bg-[#50504f] text-[#E8EDDF]">
-                    Delete
-                  </Button>
-                </TableCell>
+                
               </TableRow>
             ))}
 

@@ -10,7 +10,7 @@ const UserTopBar = () => {
 	const handleLogout = () => {
 		localStorage.removeItem('token'); // or however you store your token
 		dispatch({ type: 'LOGOUT' });
-		navigate('/login');
+		navigate('/');
 	};
 
 	return (

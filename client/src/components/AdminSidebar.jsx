@@ -17,7 +17,7 @@ export default function AdminSidebar() {
     const handleLogout = () => {
       localStorage.removeItem("token");
       dispatch({ type: "LOGOUT" });
-      navigate("/login");
+      navigate("/");
   };
   return (
     <div className="h-screen w-[20%] sticky top-0 border-r border-r-[#343A40] flex flex-col justify-between py-8 px-12">
@@ -25,11 +25,9 @@ export default function AdminSidebar() {
         Film<span className="text-[#F5CB5C] ">Folio</span>
       </div>
       <nav className="flex flex-col gap-3">
-        <AdminNavLink link="/" Icon={House} title="Dashboard" />
+        <AdminNavLink link="/admin" Icon={House} title="Dashboard" />
         <AdminNavLink link="/movies" Icon={Clapperboard} title="Movies" />
         <AdminNavLink link="/users" Icon={User} title="Users" />
-        <AdminNavLink link="/comments" Icon={MessageCircle} title="Comments" />
-        <AdminNavLink link="/profile" Icon={UserPen} title="Profile" />
       </nav>
       <div></div>
       <button onClick={handleLogout} className="text-white flex gap-2 px-3 py-4 rounded-md">

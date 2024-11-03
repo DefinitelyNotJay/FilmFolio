@@ -24,7 +24,7 @@ const Register = () => {
         try {
             await axios.post(`${url}/auth/register`, credentials);
             dispatch({ type: "REGISTER_SUCCESS" });
-            navigate("/login");
+            navigate("/");
         } catch (error) {
             dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
         }
@@ -82,7 +82,7 @@ const Register = () => {
                 >ลงทะเบียน</button>
                 <div className="login-link flex justify-center mt-6 space-x-2 text-gray-600">
                     <span>มีบัญชีอยู่แล้ว?</span>
-                    <button onClick={() => navigate("/login")} className="text-[#2596be] hover:text-[#76b9cc] font-semibold">
+                    <button onClick={() => navigate("/")} className="text-[#2596be] hover:text-[#76b9cc] font-semibold">
                         เข้าสู่ระบบ
                     </button>
                 </div>

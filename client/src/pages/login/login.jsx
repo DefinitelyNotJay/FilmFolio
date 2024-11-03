@@ -24,7 +24,7 @@ const Login = () => {
             const { isAdmin } = res.data;
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
             if (isAdmin) {
-                navigate("/");
+                navigate("/admin");
             } else {
                 navigate("/home");
             }

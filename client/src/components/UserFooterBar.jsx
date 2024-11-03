@@ -23,30 +23,25 @@ function UserFooterBar() {
     <div className="fixed bottom-0 w-[390px] h-[75px] bg-[#1A1A1A] flex justify-around items-center py-2 shadow-md rounded-t-3xl">
       <a href="/home">
         <div className="cursor-pointer flex flex-col items-center">
-          <div className="flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white">
+          <div className="flex items-center justify-center w-10 h-10 rounded-full hover:scale-110 text-white">
             <GoHome className="text-2xl" />
           </div>
-          <span className="text-xs text-white mt-1">Home</span>
         </div>
         </a>
 
-      <div className="cursor-pointer flex flex-col items-center text-gray-500 hover:text-white">
-        <FcLike className="text-2xl" />
-      </div>
-
       <a href="/historyrating">
-        <div className="cursor-pointer flex flex-col items-center text-gray-500 hover:text-white">
+        <div className="cursor-pointer flex flex-col items-center hover:scale-110 text-white">
           <MdOutlineHistory className="text-2xl" />
         </div>
       </a>
 
       <a href="/userprofile">
-        <div className="cursor-pointer flex flex-col items-center text-gray-500 hover:text-white">
+        <div className="cursor-pointer flex flex-col items-center hover:scale-110 text-white">
           <LuUser2 className="text-2xl" />
         </div>
       </a>
 
-      <div onClick={handleLogout} className="cursor-pointer flex flex-col items-center text-gray-500 hover:text-white">
+      <div onClick={handleLogout} className="cursor-pointer flex flex-col items-center hover:scale-110 text-white">
         <IoMdLogOut className="text-2xl" />
       </div>
 

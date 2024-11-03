@@ -15,7 +15,7 @@ import Login from "./pages/login/login";
 import UserProfile from "./pages/user/UserProfile";
 import MovieDetail from "./pages/user/MovieDetail";
 
-export const url = "http://54.161.12.61:3000/api";
+export const url = "https://jfpx657jgu2zz4sgoicwodlbcm0qisvk.lambda-url.us-east-1.on.aws/:3000/api";
 
 export default function App() {
   return (

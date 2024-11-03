@@ -16,6 +16,8 @@ const MovieDetail = () => {
 	const [openComment, setOpenComment] = useState(false);
 	const [commentText, setCommentText] = useState('');
 	const [comment, setComment] = useState([]);
+	const [openStar, setOpenStar] = useState(false);
+	const [star, setStar] = useState(0);
 
 	const { user } = useContext(AuthContext);
 
@@ -48,7 +50,13 @@ const MovieDetail = () => {
 					<div className="flex justify-between items-center mb-4">
 						<h1 className="font-semibold">• User review</h1>
 						<div className="flex gap-2">
-							<Button className="bg-[#E49600] text-[12px] rounded-full">
+							{/* star */}
+							<Button
+								className="bg-[#E49600] text-[12px] rounded-full"
+								onClick={() => {
+									setOpenStar(!openStar);
+								}}
+							>
 								<Star />
 							</Button>
 							<Button
@@ -61,13 +69,69 @@ const MovieDetail = () => {
 							</Button>
 						</div>
 					</div>
+					{openStar && (
+						<div className="text-black p-2">
+							<form
+								action=""
+								onSubmit={async (e) => {
+									e.preventDefault();
+									// const { movieId, userId, rating } = req.body;
+									await axios
+										.post(
+											`${url}/rating/create`,
+											{
+												movieId: id,
+												userId: user._id,
+												rating: star,
+											},
+											{
+												withCredentials: true,
+											}
+										)
+										.then(() => {
+											toast.success('Success!', {
+												position: 'top-center',
+												autoClose: 1000,
+												hideProgressBar: false,
+												theme: 'dark',
+												onClose: () => {
+													setStar('');
+													setOpenStar(false);
+													window.location.reload();
+												},
+											});
+										});
+								}}
+								className="flex items-center h-full gap-2"
+							>
+								<select
+									onChange={(e) => {
+										setStar(e.target.value);
+										console.log(star);
+									}}
+									value={star}
+									name="star"
+									id=""
+									className="g-full rounded-lg text-white bg-[#333] p-4"
+								>
+									<option value="1">★ ☆ ☆ ☆ ☆</option>
+									<option value="2">★ ★ ☆ ☆ ☆</option>
+									<option value="3">★ ★ ★ ☆ ☆</option>
+									<option value="4">★ ★ ★ ★ ☆</option>
+									<option value="5">★ ★ ★ ★ ★</option>
+								</select>
+								<Button type="submit" className="w-fit p-2 text-[#fdfdff] rounded-lg bg-[#333]">
+									<Check height={18} />
+								</Button>
+							</form>
+						</div>
+					)}
 					{openComment && (
 						<>
 							<form
 								className="relative"
 								onSubmit={async (e) => {
 									e.preventDefault();
-									console.log('hey');
 									await axios
 										.post(
 											`${url}/comment/create`,
@@ -88,6 +152,7 @@ const MovieDetail = () => {
 												onClose: () => {
 													setCommentText('');
 													setOpenComment(false);
+													window.location.reload();
 												},
 											});
 										});

@@ -12,11 +12,10 @@ import UserLayout from "./pages/user/UserLayout";
 import Historyrating from "./pages/user/Historyrating";
 import Register from "./pages/register/register";
 import Login from "./pages/login/login";
-import Admin from "./pages/admin/admin";
 import UserProfile from "./pages/user/UserProfile";
 import MovieDetail from "./pages/user/MovieDetail";
 
-export const url = "http://localhost:3000/api";
+export const url = "http://54.161.12.61:3000/api";
 
 export default function App() {
   return (

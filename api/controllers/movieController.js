@@ -72,14 +72,15 @@ export async function createMovie(req, res, next) {
 	const movieDetail = req.body;
 	const movieImage = req.file;
 
+	console.log(movieDetail)
+
 	await putObj(movieImage.originalname, movieImage.buffer, movieImage.mimetype);
 
 	const movieDoc = await Movie.create({
 		title: movieDetail.title,
 		synopsis: movieDetail.synopsis,
 		year: movieDetail.year,
-		category: movieDetail.categories,
-		// https://filmfolio-backend.s3.us-east-1.amazonaws.com/IMG_6344.jpg
+		category: movieDetail.category,
 		image: `https://filmfolio-backend.s3.us-east-1.amazonaws.com/${movieImage.originalname}`,
 	});
 	res.status(200).json('Fine!');

@@ -14,7 +14,7 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 app.use(cors({
-	origin: "http://54.161.12.61:5173",
+	origin: "https://deploy-bf.d13325yl9ed3ai.amplifyapp.com",
 	credentials: true
 }));
 

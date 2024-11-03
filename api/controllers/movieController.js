@@ -79,7 +79,6 @@ export async function createMovie(req, res, next) {
 		synopsis: movieDetail.synopsis,
 		year: movieDetail.year,
 		category: movieDetail.categories,
-		// https://filmfolio-backend.s3.us-east-1.amazonaws.com/IMG_6344.jpg
 		image: `https://filmfolio-backend.s3.us-east-1.amazonaws.com/${movieImage.originalname}`,
 	});
 	res.status(200).json('Fine!');

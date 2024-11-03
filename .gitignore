@@ -44,3 +44,5 @@ public/
 
 .api/node_modules
 .client/node_modules
+api/pnpm-lock.yaml
+client/pnpm-lock.yaml

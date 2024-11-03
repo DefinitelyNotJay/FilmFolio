@@ -1,6 +1,7 @@
 import { Eye, Star, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-export default function MovieList({title="unknown", imgSrc, id}) {
+import StarRating from "./StarRating";
+export default function MovieList({title="unknown", imgSrc, id, rating, year}) {
   const navigate = useNavigate();
   return (
     <div
@@ -20,18 +21,11 @@ export default function MovieList({title="unknown", imgSrc, id}) {
           {title.length > 12 ? title.slice(0, 13) + "..." : title}
           
         </p>
+        <p className="text-sm text-gray-400 text-center">{year}</p>
         <div className="flex mt-1 justify-evenly text-[#E8EDDF] text-sm">
-          <div className="flex items-center">
-            <Eye className="fill-[#1b6874] stroke-[#242423]" />
-            {1200}
-          </div>
-          <div className="flex items-center">
-            <Star className="fill-[#55a572] stroke-[#242423]" />
-            {4}
-          </div>
-          <div className="flex items-center">
-            <Heart className="fill-[#fd8b7c] stroke-[#242423]" />
-            {30}
+          <div className="flex items-center gap-1">
+            <StarRating rating={rating}/>
+             ({rating})
           </div>
         </div>
       </div>

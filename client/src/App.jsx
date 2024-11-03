@@ -22,11 +22,10 @@ export default function App() {
   return (
     <Routes>
       <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/admin" element={<Admin />} />
+      <Route path="/" element={<Login />} />
       {/* Admin Routes */}
       <Route element={<AdminLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/users" element={<Users />} />
         <Route path="/movies" element={<Movie />} />

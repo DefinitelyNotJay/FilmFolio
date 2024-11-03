@@ -7,7 +7,7 @@ import { UserCheck } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="w-full h-full px-8 py-8">
+    <div className="w-full px-8 py-8 bg-[#242423">
       <h1 className="text-2xl text-white">Movies Dashboard</h1>
       <div className="h-full w-full grid grid-cols-3 gap-x-4 gap-y-0 mt-4">
         <div className="grid grid-rows-2 h-full gap-y-4">

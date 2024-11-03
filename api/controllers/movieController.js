@@ -3,7 +3,9 @@ import { Category, Comment, Movie, User } from '../model/Model.js';
 import { S3Client, ListBucketsCommand } from '@aws-sdk/client-s3';
 
 export async function getAllMovies(req, res, next) {
-	let movies = await Movie.find({ image: { $ne: null } }).lean();
+	let movies = await Movie.find({ image: { $ne: null } })
+	.sort({ _id: -1 })
+	.lean();
 	for (let movie of movies) {
 		if (movie.image) {
 			const imgUrl = await getImageUrl(movie.image);

@@ -61,3 +61,8 @@ export const loginUser = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getAllUsers = async (req, res, next) => {
+ const users = await User.find()
+ return res.status(200).json(users)
+};

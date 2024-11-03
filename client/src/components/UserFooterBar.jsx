@@ -16,7 +16,7 @@ function UserFooterBar() {
     const handleLogout = () => {
       localStorage.removeItem("token");
       dispatch({ type: "LOGOUT" });
-      navigate("/login");
+      navigate("/");
     };
 
   return (

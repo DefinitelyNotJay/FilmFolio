@@ -17,7 +17,7 @@ export default function AdminSidebar() {
     const handleLogout = () => {
       localStorage.removeItem("token");
       dispatch({ type: "LOGOUT" });
-      navigate("/login");
+      navigate("/");
   };
   return (
     <div className="h-screen w-[20%] sticky top-0 border-r border-r-[#343A40] flex flex-col justify-between py-8 px-12">

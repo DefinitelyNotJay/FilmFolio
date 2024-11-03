@@ -8,6 +8,7 @@ import { url } from '@/App';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/userContext';
 import { toast, ToastContainer } from 'react-toastify';
+import StarRating from '@/components/StarRating';
 
 const MovieDetail = () => {
 	const { id } = useParams();
@@ -47,20 +48,19 @@ const MovieDetail = () => {
 					<h1 className="text-2xl font-semibold">{movieData.title}</h1>
 					<p className="text-sm">{movieData.year}</p>
 					<p className="text-sm">★ ★ ★ ★ ☆</p>
-					<p>{previousStar}</p>
 				</div>
 			</section>
 			<section className="mt-4 flex flex-col gap-3">
-				{previousStar && (
-					<div>
-						<h1 className="font-semibold">• Your Score</h1>
-						<p className="text-sm">{movieData.synopsis}</p>
-					</div>
-				)}
 				<div>
 					<h1 className="font-semibold">• Movie Subject</h1>
 					<p className="text-sm">{movieData.synopsis}</p>
 				</div>
+				{previousStar && (
+					<div className='flex gap-2'>
+						<h1 className="font-semibold">• Your Score</h1>
+						<StarRating rating={previousStar} />
+					</div>
+				)}
 				<div>
 					<div className="flex justify-between items-center mb-4">
 						<h1 className="font-semibold">• User review</h1>

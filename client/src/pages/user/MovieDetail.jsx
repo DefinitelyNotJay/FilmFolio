@@ -7,6 +7,7 @@ import axios from 'axios';
 import { url } from '@/App';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/userContext';
+import { toast, ToastContainer } from 'react-toastify';
 
 const MovieDetail = () => {
 	const { id } = useParams();
@@ -14,7 +15,7 @@ const MovieDetail = () => {
 	const [imageUrl, setImageUrl] = useState('');
 	const [openComment, setOpenComment] = useState(false);
 	const [commentText, setCommentText] = useState('');
-	const [comment, setComment] = useState([])
+	const [comment, setComment] = useState([]);
 
 	const { user } = useContext(AuthContext);
 
@@ -25,11 +26,11 @@ const MovieDetail = () => {
 			setOpenComment(false);
 		});
 
-		axios.get(`${url}/comment/movie/${id}`)
-			.then(res=>setComment(res.data))
+		axios.get(`${url}/comment/movie/${id}`).then((res) => setComment(res.data));
 	}, [id]);
 	return movieData ? (
-		<div className="text-[#fdfdff] p-12 h-full">
+		<div className="bg-[#201c1c] text-[#fdfdff] p-12 w-full pb-24">
+			<ToastContainer autoClose={2000} closeOnClick theme="dark" />
 			<section>
 				<img src={`${imageUrl}`} alt="" className="h-60 mx-auto rounded-md" />
 				<div className="text-center flex flex-col gap-1 mt-2">
@@ -52,7 +53,6 @@ const MovieDetail = () => {
 							</Button>
 							<Button
 								onClick={() => {
-									console.log('23123');
 									setOpenComment(!openComment);
 								}}
 								className="bg-[#fdfdff] text-[#333533] text-[12px] rounded-full"
@@ -64,20 +64,34 @@ const MovieDetail = () => {
 					{openComment && (
 						<>
 							<form
+								className="relative"
 								onSubmit={async (e) => {
 									e.preventDefault();
-									await axios.post(
-										`${url}/comment/create`,
-										{
-											movieId: movieData._id,
-											userId: user._id,
-											comment: commentText,
-										},
-										{ withCredentials: true }
-									);
-									setCommentText('');
+									console.log('hey');
+									await axios
+										.post(
+											`${url}/comment/create`,
+											{
+												movieId: movieData._id,
+												userId: user._id,
+												comment: commentText,
+											},
+											{ withCredentials: true }
+										)
+										.then(() => {
+											console.log('hey2');
+											toast.success('Success!', {
+												position: 'top-center',
+												autoClose: 1000,
+												hideProgressBar: false,
+												theme: 'dark',
+												onClose: () => {
+													setCommentText('');
+													setOpenComment(false);
+												},
+											});
+										});
 								}}
-								className=""
 							>
 								<textarea
 									name=""
@@ -89,29 +103,38 @@ const MovieDetail = () => {
 									}}
 									className="bg-[#333] p-4 w-full outline-none rounded-xl resize-none"
 								></textarea>
-								<div className="relative top-0 left-0 justify-self-end flex gap-2">
-									<Button type="button">
-										<X />
+								<div className="absolute bottom-4 right-2 justify-self-end flex gap-2">
+									<Button
+										type="button"
+										variant={'destructive'}
+										onClick={() => {
+											setCommentText('');
+											setOpenComment(false);
+										}}
+										className="w-fit p-2 rounded-full"
+									>
+										<X height={18} />
 									</Button>
-									<Button type="submit">
-										<Check />
+									<Button type="submit" className="w-fit p-2 bg-[#fdfdff] rounded-full text-[#333]">
+										<Check height={18} />
 									</Button>
 								</div>
 							</form>
 						</>
 					)}
-					<div className='flex flex-col gap-3'>
-					{comment?.map(com=>(
-						<div key={com._id} className="p-3 border flex flex-col gap-2 rounded-xl bg-[#333] mt-1">
-						<div className="icon flex gap-2 items-center">
-							<CircleUserRound size={32} />
-							<p>{com.username}</p>
-						</div>
-						<p className="leading-7">
-						{com.comment.text}
-						</p>
-					</div>
-					))}
+					<div className="flex flex-col gap-3">
+						{comment?.map((com, index) => (
+							<div
+								key={`${com._id}-${index}`}
+								className="p-3 border flex flex-col gap-2 rounded-xl bg-[#333] mt-1"
+							>
+								<div className="icon flex gap-2 items-center">
+									<CircleUserRound size={32} />
+									<p>{com.username}</p>
+								</div>
+								<p className="leading-7">{com.comment.text}</p>
+							</div>
+						))}
 					</div>
 				</div>
 			</section>

@@ -29,7 +29,7 @@ const MovieDetail = () => {
 			.then(res=>setComment(res.data))
 	}, [id]);
 	return movieData ? (
-		<div className="text-[#fdfdff] p-12 h-full">
+		<div className="text-[#fdfdff] px-12 w-full bg-[#201c1c]   pb-24">
 			<section>
 				<img src={`${imageUrl}`} alt="" className="h-60 mx-auto rounded-md" />
 				<div className="text-center flex flex-col gap-1 mt-2">
@@ -89,7 +89,7 @@ const MovieDetail = () => {
 									}}
 									className="bg-[#333] p-4 w-full outline-none rounded-xl resize-none"
 								></textarea>
-								<div className="relative top-0 left-0 justify-self-end flex gap-2">
+								<div className="relative top-0 left-0 justify-self-end flex gap-2 mb-5">
 									<Button type="button">
 										<X />
 									</Button>
@@ -102,7 +102,7 @@ const MovieDetail = () => {
 					)}
 					<div className='flex flex-col gap-3'>
 					{comment?.map(com=>(
-						<div key={com._id} className="p-3 border flex flex-col gap-2 rounded-xl bg-[#333] mt-1">
+						<div key={com._id} className="p-3 border flex flex-col gap-2 rounded-xl bg-[#333] mt-1 ">
 						<div className="icon flex gap-2 items-center">
 							<CircleUserRound size={32} />
 							<p>{com.username}</p>

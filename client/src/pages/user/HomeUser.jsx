@@ -86,7 +86,7 @@ function HomeUser() {
         className="h-[230px] bg-cover bg-center"
         style={{
           backgroundImage:
-            'url("https://s10019.cdn.ncms.io/wp-content/uploads/2024/05/House-of-the-Dragon-Season-2.jpg.jpeg")',
+            'url("https://images.alphacoders.com/107/thumb-1920-1072652.jpg")',
         }}
       ></div>
 

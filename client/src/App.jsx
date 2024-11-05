@@ -15,7 +15,7 @@ import Login from "./pages/login/login";
 import UserProfile from "./pages/user/UserProfile";
 import MovieDetail from "./pages/user/MovieDetail";
 
-export const url = "http://3.80.171.173:3000/api";
+export const url = "http://52.91.179.139:3000/api";
 
 export default function App() {
   return (
